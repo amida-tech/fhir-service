@@ -5,6 +5,7 @@ Created on Oct 10, 2019
 '''
 
 import FHIR_Helper
+import sys
 
 from flask import Flask, request
 app = Flask(__name__)
@@ -36,12 +37,19 @@ FHIR_Helper.cleanup_html_lookup_file(html_lookup_file)
 @app.route('/suggest', methods=['POST'])
 def lookup_candidates():
     user_query = request.form.get('query')
+    response_limit = request.form.get('limit')
+    if response_limit is None:
+        response_limit = sys.maxsize
+    else:
+        response_limit = int(response_limit)
     
     more_candidates = FHIR_Helper.lookup_medlineplus(user_query, html_lookup_file)
     if user_query not in more_candidates:
         more_candidates.append(user_query.lower())
         
-    return str(FHIR_Helper.find_condition_information(more_candidates))
+    condition_information = FHIR_Helper.find_condition_information(more_candidates)
+    condition_information = condition_information[0:min(response_limit, len(condition_information))]
+    return str(condition_information)
 
 @app.route('/fetch', methods=['POST'])
 def fetch_information():

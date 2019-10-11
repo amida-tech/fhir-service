@@ -1,23 +1,23 @@
-Rheumatoid arthritis	RA
-Cardiac Arrest	SCA
-Diabetes	Diabetes mellitus
-Chicken Pox	Varicella
-Heart Attack	 Myocardial infarction
-Alcoholism	 Alcoholism
-Stroke	 CVA
 Atrial Fibrillation	AF
+Posttraumatic stress disorder	PTSD
+Chicken Pox	Varicella
+Diabetes	Diabetes mellitus
+Atrial Fibrillation	 AFib
+Gout	Gouty arthritis
+Rheumatoid arthritis	RA
+Seizure	Seizures
+Alcoholism	 Alcohol dependence
+Blighted Ovum	Miscarriage
+Alcoholism	Alcohol Abuse
+Pneumonia	Bronchopneumonia
 Heart Attack	MI
 Stroke	Brain attack
-Pneumonia	Bronchopneumonia
-Gout	Gouty arthritis
-Alcoholism	Alcohol Abuse
-Blighted Ovum	Miscarriage
+Alcoholism	 Alcoholism
+Stroke	 CVA
+Heart Attack	 Myocardial infarction
 Diabetes	 DM
-Atrial Fibrillation	 AFib
-Alcoholism	 Alcohol dependence
+Cardiac Arrest	SCA
 Cardiac Arrest	 Sudden cardiac death
-Posttraumatic stress disorder	PTSD
-Seizure	Seizures
 Diabetes	Diabetes mellitus
 Diabetes	 DM
 Cardiac Arrest	SCA

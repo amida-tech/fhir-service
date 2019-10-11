@@ -27,12 +27,12 @@ def ingest_output_data(output_file):
         condition = parts[0].lower()
         related_data = parts[0:]
         output_dict[condition] = related_data
-        output_token_dict[condition] = Stopword.remove_agressive_stopwords(Tokenizer.whitespace_tokenize(condition
-                                                                                                         .replace('(', '')
-                                                                                                         .replace(')', '')
-                                                                                                         .replace(':', '')
-                                                                                                         .replace(',', '')
-                                                                                                         ))
+        output_token_dict[condition] = Stopword.remove_agressive_stopwords(
+            Tokenizer.whitespace_tokenize(condition
+                                          .replace(')', '')
+                                          .replace(':', '')
+                                          .replace(',', '')
+                                          , 'Porter'))
 
 def ingest_fhir_data(fhir_data_dir):
     onlyfiles = [f for f in listdir(fhir_data_dir) if isfile(join(fhir_data_dir, f))]
@@ -86,14 +86,19 @@ def find_tokenized_variety(conditions):
     threshold = 0.0
     for condition in conditions:
         condition = condition.strip().lower()
-        tokens = Tokenizer.whitespace_tokenize(condition)
+        tokens = Tokenizer.whitespace_tokenize(condition, 'Porter')
         for item in output_token_dict:
             item_tokens = output_token_dict[item]
             # here we compare tokens and item_tokens
             similarity = Metrics.harmonic_similarity(tokens, item_tokens)
             if similarity > threshold:
-                total_set.add(item)
-    return list(total_set)
+                # add the similarity so that we can rank descending
+                total_set.add((item, similarity))
+    
+    sorted_by_similarity = sorted(total_set, key=lambda tup: tup[1], reverse=True)
+    sorted_by_similarity = [x[0] for x in sorted_by_similarity]
+    
+    return sorted_by_similarity
               
 def find_condition_information(conditions):
     # right now, test data and output_data needs to be in memory to work
@@ -104,7 +109,7 @@ def find_condition_information(conditions):
     
     # this is the subset solution
     #return find_subset_variety(conditions)
-
+    # this is a slight more sophisticated token based matching solution
     return find_tokenized_variety(conditions)
 
 def lookup_medlineplus(user_query, html_lookups_file):
