@@ -38,16 +38,21 @@ FHIR_Helper.cleanup_html_lookup_file(html_lookup_file)
 def lookup_candidates():
     user_query = request.form.get('query')
     response_limit = request.form.get('limit')
+    threshold = request.form.get('threshold')
     if response_limit is None:
         response_limit = sys.maxsize
     else:
         response_limit = int(response_limit)
+    if threshold is None:
+        threshold = 0.0
+    else:
+        threshold = float(threshold)
     
     more_candidates = FHIR_Helper.lookup_medlineplus(user_query, html_lookup_file)
     if user_query not in more_candidates:
         more_candidates.append(user_query.lower())
         
-    condition_information = FHIR_Helper.find_condition_information(more_candidates)
+    condition_information = FHIR_Helper.find_condition_information(more_candidates, threshold)
     condition_information = condition_information[0:min(response_limit, len(condition_information))]
     return str(condition_information)
 

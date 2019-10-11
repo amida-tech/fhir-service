@@ -81,9 +81,8 @@ def find_subset_variety(conditions):
         total_set |= set(matches)
     return list(total_set)
               
-def find_tokenized_variety(conditions):
+def find_tokenized_variety(conditions, threshold):
     total_set = set()
-    threshold = 0.0
     for condition in conditions:
         condition = condition.strip().lower()
         tokens = Tokenizer.whitespace_tokenize(condition, 'Porter')
@@ -100,7 +99,7 @@ def find_tokenized_variety(conditions):
     
     return sorted_by_similarity
               
-def find_condition_information(conditions):
+def find_condition_information(conditions, threshold = 0):
     # right now, test data and output_data needs to be in memory to work
     # we would like to expand this for
     #    1) partial matches
@@ -110,7 +109,7 @@ def find_condition_information(conditions):
     # this is the subset solution
     #return find_subset_variety(conditions)
     # this is a slight more sophisticated token based matching solution
-    return find_tokenized_variety(conditions)
+    return find_tokenized_variety(conditions, threshold)
 
 def lookup_medlineplus(user_query, html_lookups_file):
     # need the lowercase version of the query to have any shot
