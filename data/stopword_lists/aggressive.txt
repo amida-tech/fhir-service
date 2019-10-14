@@ -16,5 +16,7 @@ other
 situation
 the
 to
+type
 unknown
 with
+without

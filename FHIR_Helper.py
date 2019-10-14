@@ -81,21 +81,18 @@ def find_subset_variety(conditions):
         total_set |= set(matches)
     return list(total_set)
               
-def find_tokenized_variety(conditions, threshold):
+def find_tokenized_variety(conditions, threshold, similarity_metric):
     total_set = set()
     for condition in conditions:
         condition = condition.strip().lower()
         tokens = Tokenizer.whitespace_tokenize(condition, 'Porter')
-        print('condition')
-        print(conditions)
-        print(tokens)
         for item in output_token_dict:
             item_tokens = output_token_dict[item]
-            print('item')
-            print(item)
-            print(item_tokens)
             # here we compare tokens and item_tokens
-            similarity = Metrics.harmonic_similarity(tokens, item_tokens)
+            if 'cosine' == similarity_metric:
+                similarity = Metrics.cosine_similarity(tokens, item_tokens)
+            else:
+                similarity = Metrics.harmonic_similarity(tokens, item_tokens)
             if similarity > threshold:
                 # add the similarity so that we can rank descending
                 total_set.add((item, similarity))
@@ -105,7 +102,7 @@ def find_tokenized_variety(conditions, threshold):
     
     return sorted_by_similarity
               
-def find_condition_information(conditions, threshold = 0):
+def find_condition_information(conditions, similarity_metric, threshold = 0):
     # right now, test data and output_data needs to be in memory to work
     # we would like to expand this for
     #    1) partial matches
@@ -115,7 +112,7 @@ def find_condition_information(conditions, threshold = 0):
     # this is the subset solution
     #return find_subset_variety(conditions)
     # this is a slight more sophisticated token based matching solution
-    return find_tokenized_variety(conditions, threshold)
+    return find_tokenized_variety(conditions, threshold, similarity_metric)
 
 def lookup_medlineplus(user_query, html_lookups_file):
     # need the lowercase version of the query to have any shot
@@ -152,7 +149,7 @@ def display_matching_information(choice):
     print(output_dict[choice])
     return output_dict[choice]
     
-def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file):
+def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, similarity_metric):
     #ingest "training" data from disc
     ingest_output_data(output_data_file)
     
@@ -180,7 +177,7 @@ def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file):
         if user_query not in more_candidates:
             more_candidates.append(user_query.lower())
         
-        candidates = find_condition_information(more_candidates)   
+        candidates = find_condition_information(more_candidates, similarity_metric)   
                 
         print(candidates)
                 
@@ -189,7 +186,7 @@ def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file):
         if user_candidate in candidates:
             display_matching_information(user_candidate)
 
-def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file):
+def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file, similarity_metric):
     #ingest "training" data from disc
     ingest_output_data(output_data_file)
     
@@ -220,7 +217,7 @@ def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
             if user_query not in more_candidates:
                 more_candidates.append(user_query.lower())
             
-            candidates = find_condition_information(more_candidates)   
+            candidates = find_condition_information(more_candidates, similarity_metric)   
                     
             # only printing to disc now, not console
             fs.write(test_key)
@@ -240,5 +237,6 @@ if __name__ == '__main__':
     text_list_file = 'output/text_list.tsv'
     html_lookup_file = 'data/medfind.txt'
     test_results_file = 'output/candidate_results.tsv'
-    #main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file)
-    main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file)
+    similarity_metric = 'cosine'
+    #main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, similarity_metric)
+    main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file, similarity_metric)

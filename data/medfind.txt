@@ -1,35 +1,24 @@
-Heart Attack	MI
-Stroke	Brain attack
-Cardiac Arrest	SCA
-Alcoholism	Alcohol Abuse
-Heart Attack	 Myocardial infarction
-Stroke	 CVA
-Atrial Fibrillation	 AFib
-Atrial Fibrillation	AF
-Pneumonia	Bronchopneumonia
+Posttraumatic stress disorder	PTSD
+Cardiac Arrest	 Sudden cardiac death
+Rheumatoid arthritis	RA
+Diabetes	 DM
 Seizure	Seizures
-Blighted Ovum	Miscarriage
 Alcoholism	 Alcoholism
-Alcoholism	 Alcohol dependence
-Rheumatoid arthritis	RA
-Posttraumatic stress disorder	PTSD
-Diabetes	Diabetes mellitus
-Diabetes	 DM
-Gout	Gouty arthritis
-Chicken Pox	Varicella
-Cardiac Arrest	 Sudden cardiac death
-Diabetes	Diabetes mellitus
-Diabetes	 DM
-Cardiac Arrest	SCA
-Cardiac Arrest	 Sudden cardiac death
-Alcoholism	Alcohol Abuse
-Alcoholism	 Alcohol dependence
-Alcoholism	 Alcoholism
-Atrial Fibrillation	AF
-Atrial Fibrillation	 AFib
 Stroke	Brain attack
-Stroke	 CVA
-Rheumatoid arthritis	RA
-Gout	Gouty arthritis
+Heart Attack	 Myocardial infarction
 Pneumonia	Bronchopneumonia
-Posttraumatic stress disorder	PTSD
+Atrial Fibrillation	 AFib
+Chicken Pox	Varicella
+Alcoholism	Alcohol Abuse
+Diabetes	Diabetes mellitus
+Gout	Gouty arthritis
+Blighted Ovum	Miscarriage
+Cardiac Arrest	SCA
+Heart Attack	MI
+Atrial Fibrillation	AF
+Alcoholism	 Alcohol dependence
+Stroke	 CVA
+Diabetes	Diabetes mellitus
+Diabetes	 DM
+Diabetes	Diabetes mellitus
+Diabetes	 DM
