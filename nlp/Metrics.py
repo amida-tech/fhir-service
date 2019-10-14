@@ -4,7 +4,7 @@ Created on Oct 11, 2019
 @author: gregory
 '''
 
-def harmonic_similarity(list1, list2):
+def harmonic_similarity(list1, list2):    
     set1 = set(list1)
     set2 = set(list2)
     

@@ -5,6 +5,7 @@ Created on Oct 10, 2019
 '''
 
 import FHIR_Helper
+import json
 import sys
 
 from flask import Flask, request
@@ -54,7 +55,7 @@ def lookup_candidates():
         
     condition_information = FHIR_Helper.find_condition_information(more_candidates, threshold)
     condition_information = condition_information[0:min(response_limit, len(condition_information))]
-    return str(condition_information)
+    return json.dumps(condition_information)
 
 @app.route('/fetch', methods=['POST'])
 def fetch_information():

@@ -4,8 +4,7 @@ Created on Oct 11, 2019
 @author: gregory
 '''
 
-AGGRESSIVE_LIST = ['&', 'the', 'and', 'or', 'of', 'to', 'for', 'from', 'a', 'not',
-                   'disorder', 'situation', 'other', 'with', 'due', 'causes']
-
 def remove_agressive_stopwords(tokens):
-    return [x for x in tokens if x not in AGGRESSIVE_LIST]
+    with open('data/stopword_lists/aggressive.txt', 'r', encoding='utf-8') as fs:
+        lines = fs.readlines()
+    return [x for x in tokens if x not in lines]

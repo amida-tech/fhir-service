@@ -86,8 +86,14 @@ def find_tokenized_variety(conditions, threshold):
     for condition in conditions:
         condition = condition.strip().lower()
         tokens = Tokenizer.whitespace_tokenize(condition, 'Porter')
+        print('condition')
+        print(conditions)
+        print(tokens)
         for item in output_token_dict:
             item_tokens = output_token_dict[item]
+            print('item')
+            print(item)
+            print(item_tokens)
             # here we compare tokens and item_tokens
             similarity = Metrics.harmonic_similarity(tokens, item_tokens)
             if similarity > threshold:
@@ -217,7 +223,10 @@ def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
             candidates = find_condition_information(more_candidates)   
                     
             # only printing to disc now, not console
-            fs.write(test_key + '\t' + str(candidates) + '\n')
+            fs.write(test_key)
+            for single_candidate in candidates:
+                fs.write('\t' + single_candidate)            
+            fs.write('\n')
             
             total += 1
             if len(candidates) > 0:
@@ -230,6 +239,6 @@ if __name__ == '__main__':
     fhir_data_dir = 'data/fhir_stu3'
     text_list_file = 'output/text_list.tsv'
     html_lookup_file = 'data/medfind.txt'
-    test_results_file = 'output/candidate_results.txt'
+    test_results_file = 'output/candidate_results.tsv'
     #main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file)
     main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file)
