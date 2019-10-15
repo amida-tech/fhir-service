@@ -73,7 +73,7 @@ def cleanup_html_lookup_file(filename):
         for line in list(lines):
             fs.write(line)
                           
-def find_condition_information(conditions, similarity_metric, threshold = 0.0):
+def find_condition_information(conditions, query_method, similarity_metric, threshold = 0.0):
     # right now, test data and output_data needs to be in memory to work
     # we would like to expand this for
     #    1) partial matches
@@ -81,12 +81,15 @@ def find_condition_information(conditions, similarity_metric, threshold = 0.0):
     #    3) case differences
     
     # this is the subset solution
-    #return subset_search.find_subset_variety(output_dict, conditions)
-    # this is a slight more sophisticated token based matching solution
-    #return tokenized_search.find_tokenized_variety(output_token_dict, conditions, threshold, similarity_metric)
-    # this is perhaps even more sophisticated
-    return tfidf_search.find_tfidf_variety(output_dict, conditions, threshold)
-
+    if 'subset' == query_method:
+        return subset_search.find_subset_variety(output_dict, conditions)
+    elif 'tfidf' == query_method:
+        # this is perhaps even more sophisticated
+        return tfidf_search.find_tfidf_variety(output_dict, conditions, threshold)
+    else:
+        # this is a slight more sophisticated token based matching solution
+        return tokenized_search.find_tokenized_variety(output_token_dict, conditions, threshold, similarity_metric)
+    
 def lookup_medlineplus(user_query, html_lookups_file):
     # need the lowercase version of the query to have any shot
     URL = 'https://medlineplus.gov/' + user_query.lower().replace(' ','') + '.html'
@@ -122,7 +125,7 @@ def display_matching_information(choice):
     print(output_dict[choice])
     return output_dict[choice]
     
-def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, similarity_metric):
+def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, query_method, similarity_metric):
     #ingest "training" data from disc
     ingest_output_data(output_data_file)
     
@@ -150,7 +153,7 @@ def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, simi
         if user_query not in more_candidates:
             more_candidates.append(user_query.lower())
         
-        candidates = find_condition_information(more_candidates, similarity_metric)   
+        candidates = find_condition_information(more_candidates, query_method, similarity_metric)   
                 
         print(candidates)
                 
@@ -159,7 +162,7 @@ def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, simi
         if user_candidate in candidates:
             display_matching_information(user_candidate)
 
-def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file, similarity_metric):
+def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file, query_method, similarity_metric):
     #ingest "training" data from disc
     ingest_output_data(output_data_file)
     
@@ -190,7 +193,7 @@ def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
             if user_query not in more_candidates:
                 more_candidates.append(user_query.lower())
             
-            candidates = find_condition_information(more_candidates, similarity_metric)   
+            candidates = find_condition_information(more_candidates, query_method, similarity_metric)   
                     
             # only printing to disc now, not console
             fs.write(test_key)
@@ -211,5 +214,6 @@ if __name__ == '__main__':
     html_lookup_file = 'data/medfind.txt'
     test_results_file = 'output/candidate_results.tsv'
     similarity_metric = 'cosine'
-    #main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, similarity_metric)
-    main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file, similarity_metric)
+    query_method = 'tokenized'
+    #main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, query_method, similarity_metric)
+    main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file, query_method, similarity_metric)

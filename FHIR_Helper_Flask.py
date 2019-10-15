@@ -41,6 +41,7 @@ def lookup_candidates():
     response_limit = request.form.get('limit')
     threshold = request.form.get('threshold')
     similarity_metric = request.form.get('similarity_metric')
+    query_method = request.form.get('query_method')
     
     if response_limit is None:
         response_limit = sys.maxsize
@@ -52,14 +53,14 @@ def lookup_candidates():
         threshold = float(threshold)
     if similarity_metric is None:
         similarity_metric = 'harmonic'
-    else:
-        similarity_metric = 'cosine'
+    if query_method is None:
+        query_method = 'tokenized'
     
     more_candidates = FHIR_Helper.lookup_medlineplus(user_query, html_lookup_file)
     if user_query not in more_candidates:
         more_candidates.append(user_query.lower())
         
-    condition_information = FHIR_Helper.find_condition_information(more_candidates, similarity_metric, threshold)
+    condition_information = FHIR_Helper.find_condition_information(more_candidates, query_method, similarity_metric, threshold)
     condition_information = condition_information[0:min(response_limit, len(condition_information))]
     return json.dumps(condition_information)
 

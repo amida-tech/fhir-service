@@ -16,6 +16,8 @@ def find_tokenized_variety(output_token_dict, conditions, threshold, similarity_
             # here we compare tokens and item_tokens
             if 'cosine' == similarity_metric:
                 similarity = Metrics.cosine_similarity(tokens, item_tokens)
+            elif 'jaccard' == similarity_metric:
+                similarity = Metrics.jaccard_similarity(tokens, item_tokens)                
             else:
                 similarity = Metrics.harmonic_similarity(tokens, item_tokens)
             if similarity > threshold:
