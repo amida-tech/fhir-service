@@ -9,7 +9,7 @@ import json
 from nlp import Stopword, Tokenizer
 from os import listdir
 from os.path import isfile, join
-from search import subset_search, tokenized_search
+from search import subset_search, tfidf_search, tokenized_search
 from urllib.request import urlopen
 
 test_data_dict = dict()
@@ -73,7 +73,7 @@ def cleanup_html_lookup_file(filename):
         for line in list(lines):
             fs.write(line)
                           
-def find_condition_information(conditions, similarity_metric, threshold = 0):
+def find_condition_information(conditions, similarity_metric, threshold = 0.0):
     # right now, test data and output_data needs to be in memory to work
     # we would like to expand this for
     #    1) partial matches
@@ -83,7 +83,9 @@ def find_condition_information(conditions, similarity_metric, threshold = 0):
     # this is the subset solution
     #return subset_search.find_subset_variety(output_dict, conditions)
     # this is a slight more sophisticated token based matching solution
-    return tokenized_search.find_tokenized_variety(output_token_dict, conditions, threshold, similarity_metric)
+    #return tokenized_search.find_tokenized_variety(output_token_dict, conditions, threshold, similarity_metric)
+    # this is perhaps even more sophisticated
+    return tfidf_search.find_tfidf_variety(output_dict, conditions, threshold)
 
 def lookup_medlineplus(user_query, html_lookups_file):
     # need the lowercase version of the query to have any shot
