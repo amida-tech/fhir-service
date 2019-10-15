@@ -6,9 +6,10 @@ Created on Oct 10, 2019
 
 from bs4 import BeautifulSoup
 import json
-from nlp import Metrics, Stopword, Tokenizer
+from nlp import Stopword, Tokenizer
 from os import listdir
 from os.path import isfile, join
+from search import subset_search, tokenized_search
 from urllib.request import urlopen
 
 test_data_dict = dict()
@@ -71,37 +72,7 @@ def cleanup_html_lookup_file(filename):
     with open(filename, 'w', encoding='utf-8') as fs:
         for line in list(lines):
             fs.write(line)
-            
-            
-def find_subset_variety(conditions):
-    total_set = set()
-    for condition in conditions:
-        condition = condition.strip().lower()
-        matches = [item for item in output_dict if condition in item]
-        total_set |= set(matches)
-    return list(total_set)
-              
-def find_tokenized_variety(conditions, threshold, similarity_metric):
-    total_set = set()
-    for condition in conditions:
-        condition = condition.strip().lower()
-        tokens = Tokenizer.whitespace_tokenize(condition, 'Porter')
-        for item in output_token_dict:
-            item_tokens = output_token_dict[item]
-            # here we compare tokens and item_tokens
-            if 'cosine' == similarity_metric:
-                similarity = Metrics.cosine_similarity(tokens, item_tokens)
-            else:
-                similarity = Metrics.harmonic_similarity(tokens, item_tokens)
-            if similarity > threshold:
-                # add the similarity so that we can rank descending
-                total_set.add((item, similarity))
-    
-    sorted_by_similarity = sorted(total_set, key=lambda tup: tup[1], reverse=True)
-    sorted_by_similarity = [x[0] for x in sorted_by_similarity]
-    
-    return sorted_by_similarity
-              
+                          
 def find_condition_information(conditions, similarity_metric, threshold = 0):
     # right now, test data and output_data needs to be in memory to work
     # we would like to expand this for
@@ -110,9 +81,9 @@ def find_condition_information(conditions, similarity_metric, threshold = 0):
     #    3) case differences
     
     # this is the subset solution
-    #return find_subset_variety(conditions)
+    #return subset_search.find_subset_variety(output_dict, conditions)
     # this is a slight more sophisticated token based matching solution
-    return find_tokenized_variety(conditions, threshold, similarity_metric)
+    return tokenized_search.find_tokenized_variety(output_token_dict, conditions, threshold, similarity_metric)
 
 def lookup_medlineplus(user_query, html_lookups_file):
     # need the lowercase version of the query to have any shot
@@ -222,14 +193,14 @@ def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
             # only printing to disc now, not console
             fs.write(test_key)
             for single_candidate in candidates:
-                fs.write('\t' + single_candidate)            
+                fs.write('\t' + str(single_candidate))
             fs.write('\n')
             
             total += 1
             if len(candidates) > 0:
                 non_empties += 1
             
-    print(str(non_empties) + ' of ' + str(total))
+    print(str(non_empties) + ' of ' + str(total) + ' test queries matched')
                     
 if __name__ == '__main__':
     output_data_file = 'data/output.tsv';
