@@ -1,35 +1,77 @@
+Alcoholism	 Alcohol dependence
+Alcoholism	 Alcoholism
+Alcoholism	Alcohol Abuse
+Alcoholism	Neuropathy, alcoholic
+Appendicitis	Appendicitis, chronic
+Appendicitis	Chronic appendicitis
 Atrial Fibrillation	 AFib
-Stroke	 CVA
-Pneumonia	Bronchopneumonia
+Atrial Fibrillation	AF
+Blighted Ovum	Anembryonic Pregnancy
+Cardiac Arrest	 Sudden cardiac death
+Cardiac Arrest	SCA
 Chicken Pox	Varicella
-Blighted Ovum	Miscarriage
-Atrial Fibrillation	AF
-Cardiac Arrest	SCA
-Alcoholism	 Alcoholism
-Posttraumatic stress disorder	PTSD
-Heart Attack	MI
-Heart Attack	 Myocardial infarction
-Alcoholism	Alcohol Abuse
-Cardiac Arrest	 Sudden cardiac death
+Cystitis	Diphtheria cystitis
+Diabetes	 DM
+Diabetes	Diabetes insipidus, central
+Diabetes	Diabetes insipidus, partial
+Diabetes	Diabetes mellitus
+Diabetes	Neurohypophyseal diabetes insipidus
+Diabetes	Partial diabetes insipidus
 Gout	Gouty arthritis
-Diabetes	 DM
-Alcoholism	 Alcohol dependence
-Diabetes	Diabetes mellitus
-Seizure	Seizures
+Heart Attack	 Myocardial infarction
+Heart Attack	MI
+Hypertension	Hypertension complication after surgery
+Hypertension	Postoperative hypertension
+Hypertriglyceridemia (disorder)	Pure hyperglyceridemia
+Pneumonia	Bronchopneumonia
+Pneumonia	Bronchopneumonia due to klebsiella pneumoniae
+Pneumonia	Klebsiella pneumoniae bronchopneumonia
+Pneumonia	Klebsiella pneumoniae pneumonia
+Posttraumatic stress disorder	PTSD
+Prediabetes	Elevated blood glucose level
+Preeclampsia	Mild pre-eclampsia
+Preeclampsia	Pre-eclampsia
+Preeclampsia	Preeclampsia, mild
+Preeclampsia	Pregnancy, childbirth and the puerperium
+Pyelonephritis	Chronic obstructive kidney stones
+Pyelonephritis	Recurrent obstructive pyelonephritis
 Rheumatoid arthritis	RA
+Seizure	Seizures
+Stroke	 CVA
 Stroke	Brain attack
+Stroke	Family history of aneurysm of brain and stroke
+Stroke	Family history of stroke due to brain aneurysm (artery dilation)
+Hypertension	Hypertension complication after surgery
+Hypertension	Postoperative hypertension
 Diabetes	Diabetes mellitus
 Diabetes	 DM
+Diabetes	Diabetes insipidus, central
+Diabetes	Diabetes insipidus, partial
+Diabetes	Neurohypophyseal diabetes insipidus
+Diabetes	Partial diabetes insipidus
+Cystitis	Diphtheria cystitis
 Cardiac Arrest	SCA
 Cardiac Arrest	 Sudden cardiac death
 Alcoholism	Alcohol Abuse
 Alcoholism	 Alcohol dependence
 Alcoholism	 Alcoholism
+Alcoholism	Neuropathy, alcoholic
+Appendicitis	Appendicitis, chronic
+Appendicitis	Chronic appendicitis
 Atrial Fibrillation	AF
 Atrial Fibrillation	 AFib
 Stroke	Brain attack
 Stroke	 CVA
+Stroke	Family history of aneurysm of brain and stroke
+Stroke	Family history of stroke due to brain aneurysm (artery dilation)
 Rheumatoid arthritis	RA
 Gout	Gouty arthritis
+Preeclampsia	Mild pre-eclampsia
+Preeclampsia	Preeclampsia, mild
 Pneumonia	Bronchopneumonia
+Pneumonia	Bronchopneumonia due to klebsiella pneumoniae
+Pneumonia	Klebsiella pneumoniae bronchopneumonia
+Pneumonia	Klebsiella pneumoniae pneumonia
+Pyelonephritis	Chronic obstructive kidney stones
+Pyelonephritis	Recurrent obstructive pyelonephritis
 Posttraumatic stress disorder	PTSD

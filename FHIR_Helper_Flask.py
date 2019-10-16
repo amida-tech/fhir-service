@@ -34,7 +34,6 @@ with open(text_list_file, 'w', encoding='utf-8') as fs:
 # make sure our html lookup list contains only unique rows
 FHIR_Helper.cleanup_html_lookup_file(html_lookup_file)
 
-
 @app.route('/suggest', methods=['POST'])
 def lookup_candidates():
     user_query = request.form.get('query')
@@ -59,7 +58,9 @@ def lookup_candidates():
     more_candidates = FHIR_Helper.lookup_medlineplus(user_query, html_lookup_file)
     if user_query not in more_candidates:
         more_candidates.append(user_query.lower())
-        
+
+    more_candidates += FHIR_Helper.lookup_icd10data(user_query, html_lookup_file)
+                
     condition_information = FHIR_Helper.find_condition_information(more_candidates, query_method, similarity_metric, threshold)
     condition_information = condition_information[0:min(response_limit, len(condition_information))]
     return json.dumps(condition_information)

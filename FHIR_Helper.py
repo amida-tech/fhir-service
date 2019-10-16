@@ -11,6 +11,7 @@ from os import listdir
 from os.path import isfile, join
 from search import subset_search, tfidf_search, tokenized_search
 from urllib.request import urlopen
+from util import Dedup_Medfind
 
 test_data_dict = dict()
 
@@ -52,8 +53,8 @@ def ingest_fhir_data(fhir_data_dir):
                     test_data_dict[text_field] = 0
                 test_data_dict[text_field] += 1
 
-def lookup_from_medfind(query, html_lookup_file):
-    alts = []
+def lookup_from_synonym_file(query, html_lookup_file):
+    alts = set()
     lower_query = query.lower()
     
     with open(html_lookup_file, 'r', encoding='utf-8') as fs:
@@ -63,15 +64,8 @@ def lookup_from_medfind(query, html_lookup_file):
         comparison = parts[0].lower()
         synonym = parts[1].strip(' \n')
         if comparison == lower_query:
-            alts.append(synonym)
-    return alts
-
-def cleanup_html_lookup_file(filename):
-    with open(filename, 'r', encoding='utf-8') as fs:
-        lines = set(fs.readlines())
-    with open(filename, 'w', encoding='utf-8') as fs:
-        for line in list(lines):
-            fs.write(line)
+            alts.add(synonym)
+    return list(alts)
                           
 def find_condition_information(conditions, query_method, similarity_metric, threshold = 0.0):
     # right now, test data and output_data needs to be in memory to work
@@ -109,10 +103,49 @@ def lookup_medlineplus(user_query, html_lookups_file):
         #print('HTML Lookup failed')
         pass
     
-    # this should contain medfind stuff just found + pre-exisiting synonyms
-    alts += lookup_from_medfind(user_query, html_lookups_file)
+    # this should contain medfind stuff, icd10data and pre-exisiting synonyms
+    alts += lookup_from_synonym_file(user_query, html_lookups_file)
     
     return alts
+
+def lookup_icd10data(user_query, html_lookups_file):
+    base_URL = 'https://www.icd10data.com/'
+    URL = base_URL + 'search?s=' + user_query
+    alts = []
+    try:
+        f = urlopen(URL)
+        myfile = f.read()
+        soup = BeautifulSoup(myfile, 'html.parser')
+        searchLines = soup.findAll("div", {"class": "searchLine"})
+        # likely we would try to follow and parse just the first link
+        # however, here is how we get all the relevant top level links
+        hyperlinks = []
+        for searchLine in searchLines:
+            hyperlinks.append(base_URL + searchLine.find('a', href=True)['href'])
+
+        f2 = urlopen(hyperlinks[0])
+        myfile2 = f2.read()
+        soup2 = BeautifulSoup(myfile2, 'html.parser')        
+        
+        spanLines = soup2.findAll("span")
+        for span_line in spanLines:
+            if 'Approximate Synonyms' == span_line.text:
+                approximate_list = span_line.find_next_sibling()
+                synonyms = approximate_list.find_all('li')
+                for synonym in synonyms:
+                    alts.append(synonym.text)
+
+        with open (html_lookups_file, 'a', encoding='utf-8') as fs:
+            for alt in alts:
+                fs.write(user_query + '\t'  + alt + '\n')
+    except:
+        pass
+    
+    # this should contain medfind stuff, icd10data and pre-exisiting synonyms
+    alts += lookup_from_synonym_file(user_query, html_lookups_file)
+    
+    return alts
+
     
 def get_console_input(mode):
     if mode:
@@ -138,7 +171,7 @@ def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, quer
             fs.write(key + '\t' + str(test_data_dict[key]) + '\n')
     
     # make sure our html lookup list contains only unique rows
-    cleanup_html_lookup_file(html_lookup_file)
+    Dedup_Medfind.cleanup_html_lookup_file(html_lookup_file)
     
     # now let us try to do the main event.  We should choose from test_data really
     # this will be converted to service, but we can simulate with a loop
@@ -149,9 +182,11 @@ def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, quer
 
         # we will now try to augment this by "database" lookup
         # "Stroke" is a good test to assure that this works
-        more_candidates = lookup_medlineplus(user_query, html_lookup_file)
+        more_candidates = lookup_medlineplus(user_query, html_lookup_file)        
         if user_query not in more_candidates:
             more_candidates.append(user_query.lower())
+        
+        more_candidates += lookup_icd10data(user_query, html_lookup_file)
         
         candidates = find_condition_information(more_candidates, query_method, similarity_metric)   
                 
@@ -175,7 +210,7 @@ def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
             fs.write(key + '\t' + str(test_data_dict[key]) + '\n')
     
     # make sure our html lookup list contains only unique rows
-    cleanup_html_lookup_file(html_lookup_file)
+    Dedup_Medfind.cleanup_html_lookup_file(html_lookup_file)
     
     non_empties = 0
     total = 0
@@ -192,6 +227,8 @@ def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
             more_candidates = lookup_medlineplus(user_query, html_lookup_file)
             if user_query not in more_candidates:
                 more_candidates.append(user_query.lower())
+
+            more_candidates += lookup_icd10data(user_query, html_lookup_file)
             
             candidates = find_condition_information(more_candidates, query_method, similarity_metric)   
                     
