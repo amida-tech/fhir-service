@@ -41,37 +41,3 @@ Stroke	 CVA
 Stroke	Brain attack
 Stroke	Family history of aneurysm of brain and stroke
 Stroke	Family history of stroke due to brain aneurysm (artery dilation)
-Hypertension	Hypertension complication after surgery
-Hypertension	Postoperative hypertension
-Diabetes	Diabetes mellitus
-Diabetes	 DM
-Diabetes	Diabetes insipidus, central
-Diabetes	Diabetes insipidus, partial
-Diabetes	Neurohypophyseal diabetes insipidus
-Diabetes	Partial diabetes insipidus
-Cystitis	Diphtheria cystitis
-Cardiac Arrest	SCA
-Cardiac Arrest	 Sudden cardiac death
-Alcoholism	Alcohol Abuse
-Alcoholism	 Alcohol dependence
-Alcoholism	 Alcoholism
-Alcoholism	Neuropathy, alcoholic
-Appendicitis	Appendicitis, chronic
-Appendicitis	Chronic appendicitis
-Atrial Fibrillation	AF
-Atrial Fibrillation	 AFib
-Stroke	Brain attack
-Stroke	 CVA
-Stroke	Family history of aneurysm of brain and stroke
-Stroke	Family history of stroke due to brain aneurysm (artery dilation)
-Rheumatoid arthritis	RA
-Gout	Gouty arthritis
-Preeclampsia	Mild pre-eclampsia
-Preeclampsia	Preeclampsia, mild
-Pneumonia	Bronchopneumonia
-Pneumonia	Bronchopneumonia due to klebsiella pneumoniae
-Pneumonia	Klebsiella pneumoniae bronchopneumonia
-Pneumonia	Klebsiella pneumoniae pneumonia
-Pyelonephritis	Chronic obstructive kidney stones
-Pyelonephritis	Recurrent obstructive pyelonephritis
-Posttraumatic stress disorder	PTSD
