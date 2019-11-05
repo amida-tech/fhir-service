@@ -70,7 +70,7 @@ def lookup_candidates():
 def fetch_information():
     user_candidate = request.form.get('candidate')
     
-    return str(FHIR_Helper.display_matching_information(user_candidate))
+    return json.dumps(FHIR_Helper.display_matching_information(user_candidate))
 
 if __name__ == '__main__':
     app.run()
