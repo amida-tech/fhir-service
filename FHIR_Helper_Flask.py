@@ -9,6 +9,7 @@ import json
 import sys
 
 from flask import Flask, request
+from util import Dedup_Medfind
 app = Flask(__name__)
 
 test_data_dict = dict()
@@ -32,7 +33,7 @@ with open(text_list_file, 'w', encoding='utf-8') as fs:
         fs.write(key + '\t' + str(test_data_dict[key]) + '\n')
 
 # make sure our html lookup list contains only unique rows
-FHIR_Helper.cleanup_html_lookup_file(html_lookup_file)
+Dedup_Medfind.cleanup_html_lookup_file(html_lookup_file)
 
 @app.route('/suggest', methods=['POST'])
 def lookup_candidates():
