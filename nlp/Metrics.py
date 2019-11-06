@@ -16,13 +16,13 @@ def harmonic_similarity(list1, list2):
     
     for s1 in set1:
         if s1 in set2:
-            score1 += 1
+            score1 += 1.0
     for s2 in set2:
         if s2 in set1:
-            score2 += 1
+            score2 += 1.0
         
-    score1 /= len(s1)
-    score2 /= len(s2)
+    score1 /= len(set1)
+    score2 /= len(set2)
         
     if score1 + score2 == 0.0:
         return 0.0
