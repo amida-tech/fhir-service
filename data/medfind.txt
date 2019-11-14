@@ -4,6 +4,7 @@ Alcoholism	Alcohol Abuse
 Alcoholism	Neuropathy, alcoholic
 Appendicitis	Appendicitis, chronic
 Appendicitis	Chronic appendicitis
+Asymptomatic	Neurosyphilis, asymptomatic
 Atrial Fibrillation	 AFib
 Atrial Fibrillation	AF
 Blighted Ovum	Anembryonic Pregnancy
@@ -41,3 +42,13 @@ Stroke	 CVA
 Stroke	Brain attack
 Stroke	Family history of aneurysm of brain and stroke
 Stroke	Family history of stroke due to brain aneurysm (artery dilation)
+Tinnitus	Both sides objective pulsatile tinnitus
+Tinnitus	Both sides objective tinnitus
+Tinnitus	Both sides subjective pulsatile tinnitus
+Tinnitus	Both sides subjective tinnitus
+Tinnitus	Both sides tinnitus
+Tinnitus	Bilateral objective pulsatile tinnitus
+Tinnitus	Bilateral objective tinnitus
+Tinnitus	Bilateral subjective pulsatile tinnitus
+Tinnitus	Bilateral subjective tinnitus
+Tinnitus	Bilateral tinnitus

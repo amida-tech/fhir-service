@@ -23,6 +23,8 @@ def find_tokenized_variety(output_token_dict, conditions, threshold, similarity_
             if similarity > threshold:
                 # add the similarity so that we can rank descending
                 total_set.add((item, similarity))
+                print(condition + ' -> ' + item)
+                print(similarity)
     
     sorted_by_similarity = sorted(total_set, key=lambda tup: tup[1], reverse=True)
     #sorted_by_similarity = [x[0] for x in sorted_by_similarity]
