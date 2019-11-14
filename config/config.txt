@@ -1,0 +1,8 @@
+# this file lists all the configurations for the operation of fhir_helper
+# it allows commented lines like so
+# all the other rows are to be tab-separated.
+# the first column is the property name
+# the second (and possibly more) columns are all values if a property is multi-valued.
+
+# blank lines are also skipped as they are solely for readability
+
