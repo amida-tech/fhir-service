@@ -26,7 +26,7 @@ output_dict = dict()
 output_token_dict = dict()
 
 # this is a tsv file
-def ingest_output_data(output_file):
+def ingest_output_data(output_file, stemmer):
     """
     ingests the output data
     """
@@ -43,7 +43,7 @@ def ingest_output_data(output_file):
                                           .replace(')', '')
                                           .replace(':', '')
                                           .replace(',', '')
-                                          , 'Porter'))
+                                          , stemmer))
 
 def ingest_fhir_data(fhir_data_dir):
     """
@@ -82,7 +82,7 @@ def lookup_from_synonym_file(query, html_lookup_file):
             alts.add(synonym)
     return list(alts)
 
-def find_condition_information(conditions, query_method, similarity_metric, threshold=0.0):
+def find_condition_information(conditions, query_method, similarity_metric, stemmer, threshold=0.0):
     """
     find condition information
     """
@@ -101,7 +101,7 @@ def find_condition_information(conditions, query_method, similarity_metric, thre
     else:
         # this is a slight more sophisticated token based matching solution
         return tokenized_search.find_tokenized_variety(
-            output_token_dict, conditions, threshold, similarity_metric)
+            output_token_dict, conditions, threshold, similarity_metric, stemmer)
 
 def lookup_medlineplus(user_query, html_lookups_file):
     """
@@ -194,7 +194,7 @@ def main(config_dict):
     :param config_dict: the dictionary containing all necessary configuration values
     """
     #ingest "training" data from disc
-    ingest_output_data(config_dict['OUTPUT_DATA_FILE'])
+    ingest_output_data(config_dict['OUTPUT_DATA_FILE'], config_dict['STEMMER'])
 
     #bring in test data from disc
     ingest_fhir_data(config_dict['FHIR_DATA_DIR'])
@@ -223,7 +223,8 @@ def main(config_dict):
         more_candidates += lookup_icd10data(user_query, config_dict['HTML_LOOKUP_FILE'])
 
         candidates = find_condition_information(
-            more_candidates, config_dict['QUERY_METHOD'], config_dict['SIMILARITY_METRIC'])
+            more_candidates, config_dict['QUERY_METHOD'],
+            config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'])
 
         print(candidates)
 
@@ -272,7 +273,8 @@ def main_test(config_dict):
             more_candidates += lookup_icd10data(user_query, config_dict['HTML_LOOKUP_FILE'])
 
             candidates = find_condition_information(
-                more_candidates, config_dict['QUERY_METHOD'], config_dict['SIMILARITY_METRIC'])
+                more_candidates, config_dict['QUERY_METHOD'],
+                config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'])
 
             # only printing to disc now, not console
             fs.write(test_key)
