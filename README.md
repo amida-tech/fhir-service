@@ -24,6 +24,11 @@ There are 3 separate query lookup methods which are provided and one must be cho
 
 3. TF-IDF.  Fit and transform the output.tsv spreadsheet as the training set and pickle the vectorizer to disk.  For each query, transform using the vectorizer from training set.  Use cosine similarity to pick out the best results.
 
+# NLP Variations
+There are other NLP tools available.  These are either configurable to override a default choice or not available to configuration and hence need to be changed directly in code.
+
+1. Stemming/Lemmatization - The Porter and Snowball stemmers are both available for usage.  The current and default choice is the Porter stemmer.
+
 # Synonmys and the Need for Synonyms
 Our training and test sets are hopelessly lacking in information.  There are different names for many of the medical conditions we wish to consider and sometimes the common parlance is completely different from the official medical term.  Therefore, we need to gain access to these mapping as much as possible to enhance our query methods.  There are 3 ways we do this currently.
 
