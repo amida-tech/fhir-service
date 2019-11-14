@@ -4,6 +4,7 @@ Created on Oct 10, 2019
 @author: gregory
 """
 
+import argparse
 import json
 from os import listdir
 from os.path import isfile, join
@@ -25,7 +26,7 @@ output_dict = dict()
 output_token_dict = dict()
 
 # this is a tsv file
-def ingest_output_data(output_file):
+def ingest_output_data(output_file, stemmer):
     """
     ingests the output data
     """
@@ -42,7 +43,7 @@ def ingest_output_data(output_file):
                                           .replace(')', '')
                                           .replace(':', '')
                                           .replace(',', '')
-                                          , 'Porter'))
+                                          , stemmer))
 
 def ingest_fhir_data(fhir_data_dir):
     """
@@ -81,7 +82,7 @@ def lookup_from_synonym_file(query, html_lookup_file):
             alts.add(synonym)
     return list(alts)
 
-def find_condition_information(conditions, query_method, similarity_metric, threshold=0.0):
+def find_condition_information(conditions, query_method, similarity_metric, stemmer, threshold=0.0):
     """
     find condition information
     """
@@ -100,7 +101,7 @@ def find_condition_information(conditions, query_method, similarity_metric, thre
     else:
         # this is a slight more sophisticated token based matching solution
         return tokenized_search.find_tokenized_variety(
-            output_token_dict, conditions, threshold, similarity_metric)
+            output_token_dict, conditions, threshold, similarity_metric, stemmer)
 
 def lookup_medlineplus(user_query, html_lookups_file):
     """
@@ -181,29 +182,30 @@ def get_console_input(mode):
 
 def display_matching_information(choice):
     """
-    lookup output dictionary for key vale
+    lookup output dictionary for key value
     """
     print(output_dict[choice])
     return output_dict[choice]
 
-def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
-         query_method, similarity_metric):
+def main(config_dict):
     """
     the main function
+
+    :param config_dict: the dictionary containing all necessary configuration values
     """
     #ingest "training" data from disc
-    ingest_output_data(output_data_file)
+    ingest_output_data(config_dict['OUTPUT_DATA_FILE'], config_dict['STEMMER'])
 
     #bring in test data from disc
-    ingest_fhir_data(fhir_data_dir)
+    ingest_fhir_data(config_dict['FHIR_DATA_DIR'])
 
     # send this list to disc for safe keeping
-    with open(text_list_file, 'w', encoding='utf-8') as fs:
+    with open(config_dict['TEXT_LIST_FILE'], 'w', encoding='utf-8') as fs:
         for key in test_data_dict:
             fs.write(key + '\t' + str(test_data_dict[key]) + '\n')
 
     # make sure our html lookup list contains only unique rows
-    Dedup_Medfind.cleanup_html_lookup_file(html_lookup_file)
+    Dedup_Medfind.cleanup_html_lookup_file(config_dict['HTML_LOOKUP_FILE'])
 
     # now let us try to do the main event.  We should choose from test_data really
     # this will be converted to service, but we can simulate with a loop
@@ -214,13 +216,15 @@ def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
 
         # we will now try to augment this by "database" lookup
         # "Stroke" is a good test to assure that this works
-        more_candidates = lookup_medlineplus(user_query, html_lookup_file)
+        more_candidates = lookup_medlineplus(user_query, config_dict['HTML_LOOKUP_FILE'])
         if user_query not in more_candidates:
             more_candidates.append(user_query.lower())
 
-        more_candidates += lookup_icd10data(user_query, html_lookup_file)
+        more_candidates += lookup_icd10data(user_query, config_dict['HTML_LOOKUP_FILE'])
 
-        candidates = find_condition_information(more_candidates, query_method, similarity_metric)
+        candidates = find_condition_information(
+            more_candidates, config_dict['QUERY_METHOD'],
+            config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'])
 
         print(candidates)
 
@@ -229,29 +233,31 @@ def main(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
         if user_candidate in [i[0] for i in candidates]:
             display_matching_information(user_candidate)
 
-def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file, test_results_file,
-              query_method, similarity_metric):
+def main_test(config_dict):    
     """
     the main function for testing purposes
+    
+    :param config_dict: the dictionary containing all necessary configuration values
     """
+    
     #ingest "training" data from disc
-    ingest_output_data(output_data_file)
+    ingest_output_data(config_dict['OUTPUT_DATA_FILE'])
 
     #bring in test data from disc
-    ingest_fhir_data(fhir_data_dir)
+    ingest_fhir_data(config_dict['FHIR_DATA_DIR'])
 
     # send this list to disc for safe keeping
-    with open(text_list_file, 'w', encoding='utf-8') as fs:
+    with open(config_dict['TEXT_LIST_FILE'], 'w', encoding='utf-8') as fs:
         for key in test_data_dict:
             fs.write(key + '\t' + str(test_data_dict[key]) + '\n')
 
     # make sure our html lookup list contains only unique rows
-    Dedup_Medfind.cleanup_html_lookup_file(html_lookup_file)
+    Dedup_Medfind.cleanup_html_lookup_file(config_dict['HTML_LOOKUP_FILE'])
 
     non_empties = 0
     total = 0
 
-    with open(test_results_file, 'w', encoding='utf-8') as fs:
+    with open(config_dict['TEST_RESULTS_FILE'], 'w', encoding='utf-8') as fs:
 
         # now let us try to do the main event.  We should choose from test_data really
         # this will be converted to service, but we can simulate with a loop
@@ -260,14 +266,15 @@ def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
 
             # we will now try to augment this by "database" lookup
             # "Stroke" is a good test to assure that this works
-            more_candidates = lookup_medlineplus(user_query, html_lookup_file)
+            more_candidates = lookup_medlineplus(user_query, config_dict['HTML_LOOKUP_FILE'])
             if user_query not in more_candidates:
                 more_candidates.append(user_query.lower())
 
-            more_candidates += lookup_icd10data(user_query, html_lookup_file)
+            more_candidates += lookup_icd10data(user_query, config_dict['HTML_LOOKUP_FILE'])
 
             candidates = find_condition_information(
-                more_candidates, query_method, similarity_metric)
+                more_candidates, config_dict['QUERY_METHOD'],
+                config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'])
 
             # only printing to disc now, not console
             fs.write(test_key)
@@ -281,20 +288,36 @@ def main_test(output_data_file, fhir_data_dir, text_list_file, html_lookup_file,
 
     print(str(non_empties) + ' of ' + str(total) + ' test queries matched')
 
-if __name__ == '__main__':
-    OUTPUT_DATA_FILE = 'data/output.tsv'
-    FHIR_DATA_DIR = 'data/fhir_stu3'
-    TEXT_LIST_FILE = 'output/text_list.tsv'
-    HTML_LOOKUP_FILE = 'data/medfind.txt'
-    TEST_RESULTS_FILE = 'output/candidate_results.tsv'
-    SIMILARITY_METRIC = 'cosine'
-    QUERY_METHOD = 'tokenized'
-    IS_TEST = False
-
-    if IS_TEST:
-        main_test(OUTPUT_DATA_FILE, FHIR_DATA_DIR, TEXT_LIST_FILE, HTML_LOOKUP_FILE,
-                  TEST_RESULTS_FILE, QUERY_METHOD, SIMILARITY_METRIC)
-    else:
-        main(OUTPUT_DATA_FILE, FHIR_DATA_DIR, TEXT_LIST_FILE, HTML_LOOKUP_FILE,
-             QUERY_METHOD, SIMILARITY_METRIC)
+def ingest_config_file(config_file):
+    config_dict = {}
     
+    with open(config_file, 'r', encoding='utf-8') as fs:
+        lines = fs.readlines()
+    for line in lines:
+        line = line.strip()
+        if len(line) < 2:
+            continue
+        if line.startswith('#'):
+            continue
+        parts = line.split('\t')
+        config_dict[parts[0]] = parts[1]
+    
+    return config_dict
+
+def handle_cli(args):
+    config_dict = ingest_config_file(args.cfile)
+
+    if bool(args.test) == True:
+        main_test(config_dict)
+    else:
+        main(config_dict)
+
+# argparse parser
+parser = argparse.ArgumentParser()
+parser.add_argument('cfile', help='The location of a configuration file')
+parser.add_argument('--test', default=False, help='Are we running the test mode')
+parser.set_defaults(func=handle_cli)
+
+if __name__ == '__main__':
+    args = parser.parse_args()
+    args.func(args)

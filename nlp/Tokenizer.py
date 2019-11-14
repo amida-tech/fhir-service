@@ -8,9 +8,12 @@ from nlp import StemmingLemmatization
 
 def whitespace_tokenize(document, stemmer):
     tokens = document.split(' ')
-    if stemmer is None or stemmer != 'Porter':
+    if stemmer is None or (stemmer != 'Porter' and stemmer != 'Snowball'):
         return tokens
     stemmed_tokens = []
     for token in tokens:
-        stemmed_tokens.append(StemmingLemmatization.apply_nltk_porter_stemmer(token))
+        if 'Porter' == stemmer: 
+            stemmed_tokens.append(StemmingLemmatization.apply_nltk_porter_stemmer(token))
+        elif 'Snowball' == stemmer:
+            stemmed_tokens.append(StemmingLemmatization.apply_nltk_snowball_stemmer(token))            
     return stemmed_tokens
