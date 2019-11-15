@@ -11,7 +11,7 @@ from os.path import isfile, join
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-from nlp import Stopword, Tokenizer
+from nlp import stopword, tokenizer
 from search import subset_search, tfidf_search, tokenized_search
 from util import Dedup_Medfind
 

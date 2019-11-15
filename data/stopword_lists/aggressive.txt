@@ -1,3 +1,7 @@
+.
+,
+?
+!
 &
 a
 and
@@ -15,6 +19,7 @@ or
 other
 situation
 the
+this
 to
 type
 unknown
