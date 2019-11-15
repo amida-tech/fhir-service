@@ -6,11 +6,16 @@ Created on Oct 15, 2019
 
 from nlp import Metrics, Tokenizer
 
-def find_tokenized_variety(output_token_dict, conditions, threshold, similarity_metric, stemmer):
+def find_tokenized_variety(output_token_dict, conditions, threshold, similarity_metric, stemmer, tokenizer):
     total_set = set()
     for condition in conditions:
         condition = condition.strip().lower()
-        tokens = Tokenizer.whitespace_tokenize(condition, stemmer)
+        if 'whitespace' == tokenizer:
+            tokens = Tokenizer.whitespace_tokenize(condition, stemmer)
+        elif 'nltk' == tokenizer:
+            tokens = Tokenizer.nltk_tokenize(condition)
+        else:
+            tokens = []
         for item in output_token_dict:
             item_tokens = output_token_dict[item]
             # here we compare tokens and item_tokens

@@ -14,3 +14,4 @@ TEST_RESULTS_FILE	output/candidate_results.tsv
 SIMILARITY_METRIC	cosine
 QUERY_METHOD	tokenized
 STEMMER	Porter
+TOKENIZER	whitespace

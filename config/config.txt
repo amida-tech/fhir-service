@@ -13,3 +13,4 @@ HTML_LOOKUP_FILE	data/medfind.txt
 SIMILARITY_METRIC	cosine
 QUERY_METHOD	tokenized
 STEMMER	Porter
+TOKENIZER	whitespace

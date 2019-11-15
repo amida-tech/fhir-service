@@ -10,7 +10,6 @@ from os import listdir
 from os.path import isfile, join
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-from gensim.test import test_similarity_metrics
 
 from nlp import Stopword, Tokenizer
 from search import subset_search, tfidf_search, tokenized_search
@@ -26,7 +25,7 @@ output_dict = dict()
 output_token_dict = dict()
 
 # this is a tsv file
-def ingest_output_data(output_file, stemmer):
+def ingest_output_data(output_file, stemmer, tokenizer):
     """
     ingests the output data
     """
@@ -38,12 +37,17 @@ def ingest_output_data(output_file, stemmer):
         condition = parts[0].lower()
         related_data = parts[0:]
         output_dict[condition] = related_data
-        output_token_dict[condition] = Stopword.remove_agressive_stopwords(
-            Tokenizer.whitespace_tokenize(condition
-                                          .replace(')', '')
-                                          .replace(':', '')
-                                          .replace(',', '')
-                                          , stemmer))
+        if 'whitespace' == tokenizer:
+            tokens = Tokenizer.whitespace_tokenize(condition
+                                                   .replace(')', '')
+                                                   .replace(':', '')
+                                                   .replace(',', ''),
+                                                   stemmer)
+        elif 'nltk' == tokenizer:
+            tokens = Tokenizer.nltk_tokenize(condition)
+        else:
+            tokens = []
+        output_token_dict[condition] = Stopword.remove_agressive_stopwords(tokens)
 
 def ingest_fhir_data(fhir_data_dir):
     """
@@ -82,7 +86,8 @@ def lookup_from_synonym_file(query, html_lookup_file):
             alts.add(synonym)
     return list(alts)
 
-def find_condition_information(conditions, query_method, similarity_metric, stemmer, threshold=0.0):
+def find_condition_information(conditions, query_method, similarity_metric, stemmer,
+                               tokenizer, threshold=0.0):
     """
     find condition information
     """
@@ -101,7 +106,7 @@ def find_condition_information(conditions, query_method, similarity_metric, stem
     else:
         # this is a slight more sophisticated token based matching solution
         return tokenized_search.find_tokenized_variety(
-            output_token_dict, conditions, threshold, similarity_metric, stemmer)
+            output_token_dict, conditions, threshold, similarity_metric, stemmer, tokenizer)
 
 def lookup_medlineplus(user_query, html_lookups_file):
     """
@@ -194,7 +199,8 @@ def main(config_dict):
     :param config_dict: the dictionary containing all necessary configuration values
     """
     #ingest "training" data from disc
-    ingest_output_data(config_dict['OUTPUT_DATA_FILE'], config_dict['STEMMER'])
+    ingest_output_data(config_dict['OUTPUT_DATA_FILE'], config_dict['STEMMER'],
+                       config_dict['TOKENIZER'])
 
     #bring in test data from disc
     ingest_fhir_data(config_dict['FHIR_DATA_DIR'])
@@ -224,7 +230,7 @@ def main(config_dict):
 
         candidates = find_condition_information(
             more_candidates, config_dict['QUERY_METHOD'],
-            config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'])
+            config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'], config_dict['TOKENIZER'])
 
         print(candidates)
 
@@ -233,15 +239,16 @@ def main(config_dict):
         if user_candidate in [i[0] for i in candidates]:
             display_matching_information(user_candidate)
 
-def main_test(config_dict):    
+def main_test(config_dict):
     """
     the main function for testing purposes
-    
+
     :param config_dict: the dictionary containing all necessary configuration values
     """
-    
+
     #ingest "training" data from disc
-    ingest_output_data(config_dict['OUTPUT_DATA_FILE'])
+    ingest_output_data(config_dict['OUTPUT_DATA_FILE'], config_dict['STEMMER'],
+                       config_dict['TOKENIZER'])
 
     #bring in test data from disc
     ingest_fhir_data(config_dict['FHIR_DATA_DIR'])
@@ -274,7 +281,7 @@ def main_test(config_dict):
 
             candidates = find_condition_information(
                 more_candidates, config_dict['QUERY_METHOD'],
-                config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'])
+                config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'], config_dict['TOKENIZER'])
 
             # only printing to disc now, not console
             fs.write(test_key)
@@ -290,7 +297,7 @@ def main_test(config_dict):
 
 def ingest_config_file(config_file):
     config_dict = {}
-    
+
     with open(config_file, 'r', encoding='utf-8') as fs:
         lines = fs.readlines()
     for line in lines:
@@ -301,13 +308,18 @@ def ingest_config_file(config_file):
             continue
         parts = line.split('\t')
         config_dict[parts[0]] = parts[1]
-    
+
     return config_dict
 
-def handle_cli(args):
-    config_dict = ingest_config_file(args.cfile)
+def handle_cli(cli_args):
+    """
+    Process the command line arguments
+        
+    :param cli_args: the read in command line arguments
+    """
+    config_dict = ingest_config_file(cli_args.cfile)
 
-    if bool(args.test) == True:
+    if bool(cli_args.test):
         main_test(config_dict)
     else:
         main(config_dict)

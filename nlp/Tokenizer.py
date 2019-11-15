@@ -4,6 +4,8 @@ Created on Oct 11, 2019
 @author: gregory
 '''
 
+from nltk.tokenize import word_tokenize
+
 from nlp import StemmingLemmatization
 
 def whitespace_tokenize(document, stemmer):
@@ -19,3 +21,6 @@ def whitespace_tokenize(document, stemmer):
         elif 'Snowball' == stemmer:
             stemmed_tokens.append(StemmingLemmatization.apply_nltk_snowball_stemmer(token))            
     return stemmed_tokens
+
+def nltk_tokenize(document):
+    return [] if not document else word_tokenize(document)
