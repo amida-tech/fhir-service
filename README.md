@@ -8,12 +8,13 @@ Python service to return VASDR information for general (or official) medical con
         2. limit (optional, defalut no limit) - Limit the number of candidates to be the top n
         3. threshold (optional, default 0.0) - Only return candidates with a similarity score which exceeds threshold
         4. similairty (optional, default 'harmonic') - The similarity metric to use.  The choices are 'harmonic', 'cosine', 'jaccard'.
+        5. stemmer (optional, default 'Porter') - The stemmer or lemmatizer to use.  The choices are 'Porter' and 'Snowball'.
     2. The endpoint "fetch".  Given a candidate (as fetched from "suggest" or chosen from the output.tsv spreadsheet), find all the relevant information for that candidate.  1 parameter may be given
         1. candidate - The candidate to get the full information from
 		
-2. Report Test Query - Run FHIR_Helper.py.  This will iterate through the currently 137 test queries and report back which queries have at least 1 match in regards to exceeding the threshold (which is 0 by default, or does the query match anything at all).
+2. Report Test Query - Run FHIR_Helper.py with --test True argument.  This will iterate through the currently 137 test queries and report back which queries have at least 1 match in regards to exceeding the threshold (which is 0 by default, or does the query match anything at all).  It is configured by the config/config_test.txt file.
 
-3. Main Loop - Change FHIR_Helper.py to call main() instead of main_test() and run it.  The user can enter a query and then after candidates are returned enter in one of the candidates to see the full information for it
+3. Main Loop - Run FHIR_Helper.py *without* --test True argument.  The user can enter a query and then after candidates are returned enter in one of the candidates to see the full information for it.  It is configured by the config/config.txt file.
 
 # Under the Hood
 There are 3 separate query lookup methods which are provided and one must be chosen within the code to see its operation.  The 3 are as follows:
