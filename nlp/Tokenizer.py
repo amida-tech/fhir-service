@@ -7,6 +7,8 @@ Created on Oct 11, 2019
 from nlp import StemmingLemmatization
 
 def whitespace_tokenize(document, stemmer):
+    if not document:
+        return []
     tokens = document.split(' ')
     if stemmer is None or (stemmer != 'Porter' and stemmer != 'Snowball'):
         return tokens
