@@ -25,7 +25,7 @@ output_dict = dict()
 output_token_dict = dict()
 
 # this is a tsv file
-def ingest_output_data(output_file, stemmer, tokenizer, stopword):
+def ingest_output_data(output_file, stemmer, tokenizer_str, stopword_str):
     """
     ingests the output data
     """
@@ -38,20 +38,20 @@ def ingest_output_data(output_file, stemmer, tokenizer, stopword):
         related_data = parts[0:]
         output_dict[condition] = related_data
 
-        if 'whitespace' == tokenizer:
+        if 'whitespace' == tokenizer_str:
             tokens = tokenizer.whitespace_tokenize(condition
                                                    .replace(')', '')
                                                    .replace(':', '')
                                                    .replace(',', ''),
                                                    stemmer)
-        elif 'nltk' == tokenizer:
+        elif 'nltk' == tokenizer_str:
             tokens = tokenizer.nltk_tokenize(condition)
         else:
             tokens = []
     
-        if 'aggressive' == stopword:
+        if 'aggressive' == stopword_str:
             output_token_dict[condition] = stopword.remove_agressive_stopwords(tokens)
-        elif 'nltk' == stopword:
+        elif 'nltk' == stopword_str:
             output_token_dict[condition] = stopword.remove_nltk_stopwords(tokens)
 
 def ingest_fhir_data(fhir_data_dir):
