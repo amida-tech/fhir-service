@@ -84,7 +84,7 @@ def handle_cli(cli_args):
 
     #ingest "training" data from disc
     fhir_helper.ingest_output_data(OUTPUT_DATA_FILE, config_dict['STEMMER'],
-                                   config_dict['TOKENIZER'])
+                                   config_dict['TOKENIZER'], config_dict['STOPWORD'])
 
     #bring in test data from disc
     fhir_helper.ingest_fhir_data(FHIR_DATA_DIR)

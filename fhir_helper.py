@@ -25,7 +25,7 @@ output_dict = dict()
 output_token_dict = dict()
 
 # this is a tsv file
-def ingest_output_data(output_file, stemmer, tokenizer):
+def ingest_output_data(output_file, stemmer, tokenizer, stopword):
     """
     ingests the output data
     """
@@ -37,17 +37,22 @@ def ingest_output_data(output_file, stemmer, tokenizer):
         condition = parts[0].lower()
         related_data = parts[0:]
         output_dict[condition] = related_data
+
         if 'whitespace' == tokenizer:
-            tokens = Tokenizer.whitespace_tokenize(condition
+            tokens = tokenizer.whitespace_tokenize(condition
                                                    .replace(')', '')
                                                    .replace(':', '')
                                                    .replace(',', ''),
                                                    stemmer)
         elif 'nltk' == tokenizer:
-            tokens = Tokenizer.nltk_tokenize(condition)
+            tokens = tokenizer.nltk_tokenize(condition)
         else:
             tokens = []
-        output_token_dict[condition] = Stopword.remove_agressive_stopwords(tokens)
+    
+        if 'aggressive' == stopword:
+            output_token_dict[condition] = stopword.remove_agressive_stopwords(tokens)
+        elif 'nltk' == stopword:
+            output_token_dict[condition] = stopword.remove_nltk_stopwords(tokens)
 
 def ingest_fhir_data(fhir_data_dir):
     """
@@ -200,7 +205,7 @@ def main(config_dict):
     """
     #ingest "training" data from disc
     ingest_output_data(config_dict['OUTPUT_DATA_FILE'], config_dict['STEMMER'],
-                       config_dict['TOKENIZER'])
+                       config_dict['TOKENIZER'], config_dict['STOPWORD'])
 
     #bring in test data from disc
     ingest_fhir_data(config_dict['FHIR_DATA_DIR'])
@@ -248,7 +253,7 @@ def main_test(config_dict):
 
     #ingest "training" data from disc
     ingest_output_data(config_dict['OUTPUT_DATA_FILE'], config_dict['STEMMER'],
-                       config_dict['TOKENIZER'])
+                       config_dict['TOKENIZER'], config_dict['STOPWORD'])
 
     #bring in test data from disc
     ingest_fhir_data(config_dict['FHIR_DATA_DIR'])

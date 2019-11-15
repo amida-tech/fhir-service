@@ -14,3 +14,4 @@ SIMILARITY_METRIC	cosine
 QUERY_METHOD	tokenized
 STEMMER	Porter
 TOKENIZER	whitespace
+STOPWORD	aggressive

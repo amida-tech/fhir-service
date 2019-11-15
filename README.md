@@ -9,7 +9,8 @@ Python service to return VASDR information for general (or official) medical con
         3. threshold (optional, default 0.0) - Only return candidates with a similarity score which exceeds threshold
         4. similairty (optional, default 'harmonic') - The similarity metric to use.  The choices are 'harmonic', 'cosine', 'jaccard'.
         5. stemmer (optional, default 'Porter') - The stemmer or lemmatizer to use.  The choices are 'Porter' and 'Snowball'.
-        6. tokenizer (optional, default 'whitespace') - The tokenizer to use.  The choices are 'whitespace' and 'nltk'.    
+        6. tokenizer (optional, default 'whitespace') - The tokenizer to use.  The choices are 'whitespace' and 'nltk'.
+        7. stopword (optional, default 'aggressive') - The stopword list to use.  The choices are 'aggressive' and 'nltk'.    
     2. The endpoint "fetch".  Given a candidate (as fetched from "suggest" or chosen from the output.tsv spreadsheet), find all the relevant information for that candidate.  1 parameter may be given
         1. candidate - The candidate to get the full information from
 		
@@ -31,7 +32,9 @@ There are other NLP tools available.  These are either configurable to override 
 
 1. Stemming/Lemmatization - The Porter and Snowball stemmers are both available for usage.  The current and default choice is the Porter stemmer.
 
-2. Tokenizer - The nltk and a whitespace tokenziers are both available for usgae.  The current and default choice is the whitespace tokenizer.
+2. Tokenizer - The nltk and a whitespace tokenziers are both available for usage.  The current and default choice is the whitespace tokenizer.
+
+3. Stopword - The off-the-shelf nltk is available, but our default version is an aggressive use which would be more tailored for medical documents.
 
 # Synonmys and the Need for Synonyms
 Our training and test sets are hopelessly lacking in information.  There are different names for many of the medical conditions we wish to consider and sometimes the common parlance is completely different from the official medical term.  Therefore, we need to gain access to these mapping as much as possible to enhance our query methods.  There are 3 ways we do this currently.
