@@ -42,11 +42,15 @@ def find_tfidf_variety(output_dict, conditions, threshold):
     results = cosine_similarities[related_docs_indices]
 
     matching_docs = []
+    matching_docs_set = set()
     counter = 0
     for i in related_docs_indices:
         if results[counter] <= threshold:
             break
-        matching_docs.append((train_corpus[i // number_of_conditions], results[counter]))
+        document_term = train_corpus[i // number_of_conditions]
+        if document_term not in matching_docs_set:
+            matching_docs.append((document_term, results[counter]))
+            matching_docs_set.add(document_term)
         counter += 1
 
     return matching_docs

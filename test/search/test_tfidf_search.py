@@ -28,7 +28,7 @@ def test_find_tfidf_variety():
     threshold = 0.0
 
     expected_top_result = ('Aneurysm, aortic', 0.4559686538756185)
-    expected_matches = 99
+    expected_matches = 6
 
     scoring = tfidf_search.find_tfidf_variety(output_token_dict, conditions, threshold)
     assert expected_matches == len(scoring)
