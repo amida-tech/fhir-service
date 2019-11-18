@@ -22,7 +22,7 @@ def whitespace_tokenize(document, stemmer):
     if not document:
         return []
     tokens = document.split(' ')
-    if stemmer not in [None, 'Porter', 'Snowball']:
+    if stemmer not in ['Porter', 'Snowball']:
         return tokens
     stemmed_tokens = []
     for token in tokens:

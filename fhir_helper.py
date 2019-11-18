@@ -40,6 +40,7 @@ def ingest_output_data(output_file, stemmer, tokenizer_str, stopword_str):
 
         if 'whitespace' == tokenizer_str:
             tokens = tokenizer.whitespace_tokenize(condition
+                                                   .replace('(', '')
                                                    .replace(')', '')
                                                    .replace(':', '')
                                                    .replace(',', ''),
@@ -48,7 +49,7 @@ def ingest_output_data(output_file, stemmer, tokenizer_str, stopword_str):
             tokens = tokenizer.nltk_tokenize(condition)
         else:
             tokens = []
-    
+
         if 'aggressive' == stopword_str:
             output_token_dict[condition] = stopword.remove_agressive_stopwords(tokens)
         elif 'nltk' == stopword_str:
@@ -301,6 +302,15 @@ def main_test(config_dict):
     print(str(non_empties) + ' of ' + str(total) + ' test queries matched')
 
 def ingest_config_file(config_file):
+    """
+    Ingest config file
+
+    :param config_file: the filename of the configuration file
+    :type config_file: str
+    :return: the configuration info from file
+    :rtype: dict
+
+    """
     config_dict = {}
 
     with open(config_file, 'r', encoding='utf-8') as fs:
@@ -319,12 +329,12 @@ def ingest_config_file(config_file):
 def handle_cli(cli_args):
     """
     Process the command line arguments
-        
+
     :param cli_args: the read in command line arguments
     """
     config_dict = ingest_config_file(cli_args.cfile)
 
-    if bool(cli_args.test):
+    if cli_args.test.lower() == 'true':
         main_test(config_dict)
     else:
         main(config_dict)
