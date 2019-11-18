@@ -10,25 +10,34 @@ from sklearn.metrics.pairwise import linear_kernel
 
 vectorizer = TfidfVectorizer(use_idf=True)
 
-train_X = None
+train_x = None
 # we need a consisted ordering of keys to use this
 train_corpus = []
 
 def find_tfidf_variety(output_dict, conditions, threshold):
-    global train_X
+    """
+    find possible matches using tf_idf
+
+    :param output_token_dict: The pre-known list of conditions
+    :param conditions: The list of conditions to consider
+    :param threshold: The minimum similarity to retrain
+    :return: the top search matches
+    :rtype: list
+    """
+    global train_x
     global train_corpus
     # lazy initialization of train_X (and fitting of vectorizer)
-    if train_X is None:
+    if train_x is None:
         train_corpus = list(output_dict.keys())
-        train_X = vectorizer.fit_transform(train_corpus)
+        train_x = vectorizer.fit_transform(train_corpus)
         pickle.dump(vectorizer, open('model/tfidf_vectorizer.sav', 'wb'))
 
     # wasteful, but for clarity
     test_corpus = [condition.strip().lower() for condition in conditions]
-    test_X = vectorizer.transform(test_corpus)
+    test_x = vectorizer.transform(test_corpus)
     number_of_conditions = len(conditions)
 
-    cosine_similarities = linear_kernel(test_X, train_X).flatten()
+    cosine_similarities = linear_kernel(test_x, train_x).flatten()
     related_docs_indices = cosine_similarities.argsort()[::-1]
     results = cosine_similarities[related_docs_indices]
 

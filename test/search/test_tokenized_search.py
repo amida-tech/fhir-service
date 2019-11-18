@@ -30,7 +30,8 @@ def test_find_tokenized_variety_basic():
     stemmer = 'Porter'
     tokenizer = 'whitespace'
 
+    expected_result = [('Cor pulmonale (secondary heart disease)', 0.316)]
+
     scoring = tokenized_search.find_tokenized_variety(output_token_dict, conditions, threshold, 
                                             similarity_metric, stemmer, tokenizer)
-    print(scoring)
-    
+    assert expected_result == scoring
