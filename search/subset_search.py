@@ -16,7 +16,6 @@ def find_subset_variety(output_dict, conditions):
     total_set = set()
     for condition in conditions:
         condition = condition.strip().lower()
-        print(condition)
         matches = [item for item in output_dict if condition in item.lower()]
         total_set |= set(matches)
     return list(total_set)
