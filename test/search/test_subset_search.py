@@ -30,9 +30,8 @@ output_token_dict = {'Aneurysm, aorta or branches': ['Aneurysm', 'aorta', 'branc
                      }
 
 def test_find_subset_variety():
-    expected_top_result = 'Aneurysm, arteriovenous, traumatic'
+    # Cor pulmonale won't be included because there is no "aneurysm" in it
     expected_matches = 5
 
     scoring = subset_search.find_subset_variety(output_token_dict, conditions)
     assert expected_matches == len(scoring)
-    assert expected_top_result == scoring[0]

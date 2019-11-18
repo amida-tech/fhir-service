@@ -11,8 +11,12 @@ FHIR_DATA_DIR	data/fhir_stu3
 TEXT_LIST_FILE	output/text_list.tsv
 HTML_LOOKUP_FILE	data/medfind.txt
 TEST_RESULTS_FILE	output/candidate_results.tsv
+
 SIMILARITY_METRIC	cosine
 QUERY_METHOD	tokenized
 STEMMER	Porter
 TOKENIZER	whitespace
 STOPWORD	aggressive
+
+BASE_ICD_URL = 'https://www.icd10data.com/'
+BASE_MEDLINEPLUS_URL = 'https://medlineplus.gov/'

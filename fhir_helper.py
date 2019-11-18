@@ -13,10 +13,7 @@ from bs4 import BeautifulSoup
 
 from nlp import stopword, tokenizer
 from search import subset_search, tfidf_search, tokenized_search
-from util import Dedup_Medfind
-
-BASE_ICD_URL = 'https://www.icd10data.com/'
-BASE_MEDLINEPLUS_URL = 'https://medlineplus.gov/'
+from util import dedup_medfind
 
 test_data_dict = dict()
 
@@ -114,12 +111,12 @@ def find_condition_information(conditions, query_method, similarity_metric, stem
         return tokenized_search.find_tokenized_variety(
             output_token_dict, conditions, threshold, similarity_metric, stemmer, tokenizer)
 
-def lookup_medlineplus(user_query, html_lookups_file):
+def lookup_medlineplus(base_url, user_query, html_lookups_file):
     """
     lookup medical information from medlineplus
     """
     # need the lowercase version of the query to have any shot
-    medlineplus_url = BASE_MEDLINEPLUS_URL + user_query.lower().replace(' ', '') + '.html'
+    medlineplus_url = base_url + user_query.lower().replace(' ', '') + '.html'
     alts = []
     try:
         f = urlopen(medlineplus_url)
@@ -141,11 +138,11 @@ def lookup_medlineplus(user_query, html_lookups_file):
 
     return alts
 
-def lookup_icd10data(user_query, html_lookups_file):
+def lookup_icd10data(base_url, user_query, html_lookups_file):
     """
     lookup icd10data from the web
     """
-    url = BASE_ICD_URL + 'search?s=' + user_query
+    url = base_url + 'search?s=' + user_query
     alts = []
     try:
         f = urlopen(url)
@@ -156,7 +153,7 @@ def lookup_icd10data(user_query, html_lookups_file):
         # however, here is how we get all the relevant top level links
         hyperlinks = []
         for search_line in search_lines:
-            hyperlinks.append(BASE_ICD_URL + search_line.find('a', href=True)['href'])
+            hyperlinks.append(base_url + search_line.find('a', href=True)['href'])
 
         f2 = urlopen(hyperlinks[0])
         myfile2 = f2.read()
@@ -217,7 +214,7 @@ def main(config_dict):
             fs.write(key + '\t' + str(test_data_dict[key]) + '\n')
 
     # make sure our html lookup list contains only unique rows
-    Dedup_Medfind.cleanup_html_lookup_file(config_dict['HTML_LOOKUP_FILE'])
+    dedup_medfind.cleanup_html_lookup_file(config_dict['HTML_LOOKUP_FILE'])
 
     # now let us try to do the main event.  We should choose from test_data really
     # this will be converted to service, but we can simulate with a loop
@@ -228,11 +225,13 @@ def main(config_dict):
 
         # we will now try to augment this by "database" lookup
         # "Stroke" is a good test to assure that this works
-        more_candidates = lookup_medlineplus(user_query, config_dict['HTML_LOOKUP_FILE'])
+        more_candidates = lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
+                                             user_query, config_dict['HTML_LOOKUP_FILE'])
         if user_query not in more_candidates:
             more_candidates.append(user_query.lower())
 
-        more_candidates += lookup_icd10data(user_query, config_dict['HTML_LOOKUP_FILE'])
+        more_candidates += lookup_icd10data(config_dict['BASE_ICD_URL'],
+                                            user_query, config_dict['HTML_LOOKUP_FILE'])
 
         candidates = find_condition_information(
             more_candidates, config_dict['QUERY_METHOD'],
@@ -265,7 +264,7 @@ def main_test(config_dict):
             fs.write(key + '\t' + str(test_data_dict[key]) + '\n')
 
     # make sure our html lookup list contains only unique rows
-    Dedup_Medfind.cleanup_html_lookup_file(config_dict['HTML_LOOKUP_FILE'])
+    dedup_medfind.cleanup_html_lookup_file(config_dict['HTML_LOOKUP_FILE'])
 
     non_empties = 0
     total = 0
@@ -279,11 +278,13 @@ def main_test(config_dict):
 
             # we will now try to augment this by "database" lookup
             # "Stroke" is a good test to assure that this works
-            more_candidates = lookup_medlineplus(user_query, config_dict['HTML_LOOKUP_FILE'])
+            more_candidates = lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
+                                                 user_query, config_dict['HTML_LOOKUP_FILE'])
             if user_query not in more_candidates:
                 more_candidates.append(user_query.lower())
 
-            more_candidates += lookup_icd10data(user_query, config_dict['HTML_LOOKUP_FILE'])
+            more_candidates += lookup_icd10data(config_dict['BASE_ICD_URL'],
+                                                user_query, config_dict['HTML_LOOKUP_FILE'])
 
             candidates = find_condition_information(
                 more_candidates, config_dict['QUERY_METHOD'],

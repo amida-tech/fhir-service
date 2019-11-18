@@ -9,7 +9,7 @@ import sys
 
 import argparse
 from flask import Flask, request
-from util import Dedup_Medfind
+from util import dedup_medfind
 
 import fhir_helper
 
@@ -18,6 +18,8 @@ app = Flask(__name__)
 test_data_dict = dict()
 
 output_dict = dict()
+
+config_dict = dict()
 
 OUTPUT_DATA_FILE = 'data/output.tsv'
 FHIR_DATA_DIR = 'data/fhir_stu3'
@@ -54,11 +56,13 @@ def lookup_candidates():
     if tokenizer is None:
         tokenizer = 'whitespace'
 
-    more_candidates = fhir_helper.lookup_medlineplus(user_query, HTML_LOOKUP_FILE)
+    more_candidates = fhir_helper.lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
+                                                     user_query, HTML_LOOKUP_FILE)
     if user_query not in more_candidates:
         more_candidates.append(user_query.lower())
 
-    more_candidates += fhir_helper.lookup_icd10data(user_query, HTML_LOOKUP_FILE)
+    more_candidates += fhir_helper.lookup_icd10data(config_dict['BASE_ICD_URL'],
+                                                    user_query, HTML_LOOKUP_FILE)
 
     condition_information = fhir_helper.find_condition_information(
         more_candidates, query_method, similarity_metric, stemmer, tokenizer, threshold)
@@ -80,6 +84,7 @@ def handle_cli(cli_args):
       
     :param cli_args: the read in command line arguments
     """
+    global config_dict
     config_dict = fhir_helper.ingest_config_file(cli_args.cfile)
 
     #ingest "training" data from disc
@@ -95,7 +100,7 @@ def handle_cli(cli_args):
             fs.write(key + '\t' + str(test_data_dict[key]) + '\n')
 
     # make sure our html lookup list contains only unique rows
-    Dedup_Medfind.cleanup_html_lookup_file(HTML_LOOKUP_FILE)
+    dedup_medfind.cleanup_html_lookup_file(HTML_LOOKUP_FILE)
 
 # argparse parser
 parser = argparse.ArgumentParser()

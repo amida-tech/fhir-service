@@ -1,0 +1,67 @@
+Alcoholism	 Alcohol dependence
+Alcoholism	 Alcoholism
+Alcoholism	Alcohol Abuse
+Alcoholism	Neuropathy, alcoholic
+Appendicitis	Appendicitis, chronic
+Appendicitis	Chronic appendicitis
+Asymptomatic	Neurosyphilis, asymptomatic
+Atrial Fibrillation	 AFib
+Atrial Fibrillation	AF
+Blighted Ovum	Anembryonic Pregnancy
+Cardiac Arrest	 Sudden cardiac death
+Cardiac Arrest	SCA
+Chicken Pox	Varicella
+Cystitis	Diphtheria cystitis
+Diabetes	 DM
+Diabetes	Diabetes insipidus, central
+Diabetes	Diabetes insipidus, partial
+Diabetes	Diabetes mellitus
+Diabetes	Neurohypophyseal diabetes insipidus
+Diabetes	Partial diabetes insipidus
+Gout	Gouty arthritis
+Heart Attack	 Myocardial infarction
+Heart Attack	MI
+Hypertension	Hypertension complication after surgery
+Hypertension	Postoperative hypertension
+Hypertriglyceridemia (disorder)	Pure hyperglyceridemia
+Pneumonia	Bronchopneumonia
+Pneumonia	Bronchopneumonia due to klebsiella pneumoniae
+Pneumonia	Klebsiella pneumoniae bronchopneumonia
+Pneumonia	Klebsiella pneumoniae pneumonia
+Posttraumatic stress disorder	PTSD
+Prediabetes	Elevated blood glucose level
+Preeclampsia	Mild pre-eclampsia
+Preeclampsia	Pre-eclampsia
+Preeclampsia	Preeclampsia, mild
+Preeclampsia	Pregnancy, childbirth and the puerperium
+Pyelonephritis	Chronic obstructive kidney stones
+Pyelonephritis	Recurrent obstructive pyelonephritis
+Rheumatoid arthritis	RA
+Seizure	Seizures
+stroke	 CVA
+Stroke	 CVA
+stroke	Brain attack
+Stroke	Brain attack
+stroke	Family history of aneurysm of brain and stroke
+Stroke	Family history of aneurysm of brain and stroke
+Stroke	Family history of stroke due to brain aneurysm (artery dilation)
+stroke	Family history of stroke due to brain aneurysm (artery dilation)
+Tinnitus	Bilateral objective pulsatile tinnitus
+Tinnitus	Bilateral objective tinnitus
+Tinnitus	Bilateral subjective pulsatile tinnitus
+Tinnitus	Bilateral subjective tinnitus
+Tinnitus	Bilateral tinnitus
+Tinnitus	Both sides objective pulsatile tinnitus
+Tinnitus	Both sides objective tinnitus
+Tinnitus	Both sides subjective pulsatile tinnitus
+Tinnitus	Both sides subjective tinnitus
+Tinnitus	Both sides tinnitus
+aneurysm	Aneurysm, heart
+aneurysm	Aneurysm, ventricle
+aneurysm	Heart wall aneurysm
+aneurysm	Left ventricle aneurysm
+aneurysm	Left ventricular aneurysm
+aneurysm	Right ventricle aneurysm
+aneurysm	Right ventricular aneurysm
+aneurysm	Ventricle aneurysm
+aneurysm	Ventricular aneurysm
