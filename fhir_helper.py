@@ -74,6 +74,11 @@ def ingest_fhir_data(fhir_data_dir):
 def lookup_from_synonym_file(query, html_lookup_file):
     """
     lookup medical synonyms from disc
+    
+    @param: query: a query to make
+    @param: html_lookup_file: the location of the synonym file
+    @return: a set of all the synonyms
+    @rtype: set
     """
     alts = set()
     lower_query = query.lower()
@@ -86,7 +91,7 @@ def lookup_from_synonym_file(query, html_lookup_file):
         synonym = parts[1].strip(' \n')
         if comparison == lower_query:
             alts.add(synonym)
-    return list(alts)
+    return alts
 
 def find_condition_information(conditions, query_method, similarity_metric, stemmer,
                                tokenizer, threshold=0.0):
@@ -133,7 +138,7 @@ def lookup_medlineplus(base_url, user_query, html_lookups_file):
         pass
 
     # this should contain medfind stuff, icd10data and pre-exisiting synonyms
-    alts += lookup_from_synonym_file(user_query, html_lookups_file)
+    alts += list(lookup_from_synonym_file(user_query, html_lookups_file))
 
     return alts
 
@@ -173,7 +178,7 @@ def lookup_icd10data(base_url, user_query, html_lookups_file):
         pass
 
     # this should contain medfind stuff, icd10data and pre-exisiting synonyms
-    alts += lookup_from_synonym_file(user_query, html_lookups_file)
+    alts += list(lookup_from_synonym_file(user_query, html_lookups_file))
 
     return alts
 

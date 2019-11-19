@@ -41,3 +41,18 @@ def test_ingest_fhir_data():
     #test_data_dict are populated
     assert 11 == len(fhir_helper.test_data_dict)
     assert 4 == fhir_helper.test_data_dict[condition]
+
+def test_lookup_from_synonym_file():
+    """
+    test the lookup_from_synonym_file function and it's returned value
+    """
+    query = 'Diabetes'
+    html_lookup_file = 'test/fixture/html_lookup_file.txt'
+    expected_results = {'Diabetes insipidus, partial', 'DM', 'Partial diabetes insipidus',
+                        'Diabetes mellitus', 'Neurohypophyseal diabetes insipidus',
+                        'Diabetes insipidus, central'}
+
+    result_set = fhir_helper.lookup_from_synonym_file(query, html_lookup_file)
+
+    assert 6 == len(result_set)
+    assert expected_results == result_set
