@@ -56,8 +56,8 @@ def lookup_candidates():
     if tokenizer is None:
         tokenizer = 'whitespace'
 
-    more_candidates = fhir_helper.lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
-                                                     user_query, HTML_LOOKUP_FILE)
+    more_candidates = list(fhir_helper.lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
+                                                     user_query, HTML_LOOKUP_FILE))
     if user_query not in more_candidates:
         more_candidates.append(user_query.lower())
 

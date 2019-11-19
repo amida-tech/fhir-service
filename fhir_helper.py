@@ -86,9 +86,9 @@ def lookup_from_synonym_file(query, html_lookup_file):
     with open(html_lookup_file, 'r', encoding='utf-8') as fs:
         lines = fs.readlines()
     for line in lines:
-        parts = line.split('\t')
+        parts = line.strip().split('\t')
         comparison = parts[0].lower()
-        synonym = parts[1].strip(' \n')
+        synonym = parts[1].strip()
         if comparison == lower_query:
             alts.add(synonym)
     return alts
@@ -135,27 +135,40 @@ def find_condition_information(conditions, query_method, similarity_metric, stem
 def lookup_medlineplus(base_url, user_query, html_lookups_file):
     """
     lookup medical information from medlineplus
+    
+    :param base_url: the url for medlineplus
+    :param user_query: what to search for
+    :param html_lookups_file: the file to read and append to
+    :type base_url: str
+    :type user_query: str
+    :type html_lookups_file: str
+    :return: the query results
+    :rtype: set
     """
     # need the lowercase version of the query to have any shot
     medlineplus_url = base_url + user_query.lower().replace(' ', '') + '.html'
-    alts = []
+    print(medlineplus_url)
+    alts = set()
     try:
         f = urlopen(medlineplus_url)
         myfile = f.read()
         soup = BeautifulSoup(myfile, 'html.parser')
-        alsocalled = soup.findAll("span", {"class": "alsocalled"})[0].text
+        aliases = soup.findAll("span", {"class": "alsocalled"})
+        if not aliases:
+            return
+        alsocalled = aliases[0].text
         alsocalled = alsocalled[13:]
-        alts = alsocalled.split(',')
-        #print("HTML found " + str(alts))
+        alts.update([item.strip() for item in alsocalled.split(',')])
+        print("HTML found " + str(alts))
         with open(html_lookups_file, 'a', encoding='utf-8') as fs:
             for alt in alts:
                 fs.write(user_query + '\t'  + alt + '\n')
-    except:
-        #print('HTML Lookup failed')
+    except Exception as e:
+        print('Failed to perform medlineplus lookup: '+ str(e))
         pass
 
     # this should contain medfind stuff, icd10data and pre-exisiting synonyms
-    alts += list(lookup_from_synonym_file(user_query, html_lookups_file))
+    alts.update(lookup_from_synonym_file(user_query, html_lookups_file))
 
     return alts
 
@@ -246,8 +259,8 @@ def main(config_dict):
 
         # we will now try to augment this by "database" lookup
         # "Stroke" is a good test to assure that this works
-        more_candidates = lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
-                                             user_query, config_dict['HTML_LOOKUP_FILE'])
+        more_candidates = list(lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
+                                             user_query, config_dict['HTML_LOOKUP_FILE']))
         if user_query not in more_candidates:
             more_candidates.append(user_query.lower())
 
@@ -299,8 +312,8 @@ def main_test(config_dict):
 
             # we will now try to augment this by "database" lookup
             # "Stroke" is a good test to assure that this works
-            more_candidates = lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
-                                                 user_query, config_dict['HTML_LOOKUP_FILE'])
+            more_candidates = list(lookup_medlineplus(config_dict['BASE_MEDLINEPLUS_URL'],
+                                                 user_query, config_dict['HTML_LOOKUP_FILE']))
             if user_query not in more_candidates:
                 more_candidates.append(user_query.lower())
 
