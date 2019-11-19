@@ -5,8 +5,12 @@ Created on Nov 18, 2019
 '''
 
 import fhir_helper
+from fhir_helper import test_data_dict
 
 def test_ingest_output_data():
+    """
+    test the ingest_output_data function for correct production of data structures
+    """
     output_file = 'test/fixture/output.tsv'
     stemmer = 'Porter'
     tokenizer_str = 'whitespace'
@@ -20,6 +24,20 @@ def test_ingest_output_data():
     # output_dict, output_token_dict are all populated
     assert len(fhir_helper.output_dict) == 17
     assert condition in fhir_helper.output_dict
-    assert  fhir_helper.output_dict[condition]  == [
+    assert fhir_helper.output_dict[condition] == [
         '7399-7319', 'GI Stomach & duodenum', 'Stomach', 'Digestive (Digestive Conditions, Misc.)']
     assert fhir_helper.output_token_dict[condition] == expected_tokens
+
+def test_ingest_fhir_data():
+    """
+    test the ingest_fhir_data function for correct production of data structures
+    """
+    fhir_data_dir = 'test/fixture/fhir_stu3'
+
+    fhir_helper.ingest_fhir_data(fhir_data_dir)
+
+    condition = 'Viral sinusitis (disorder)'
+
+    #test_data_dict are populated
+    assert 11 == len(fhir_helper.test_data_dict)
+    assert 4 == fhir_helper.test_data_dict[condition]
