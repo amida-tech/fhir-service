@@ -5,7 +5,6 @@ Created on Nov 18, 2019
 '''
 
 import fhir_helper
-from fhir_helper import test_data_dict
 
 def test_ingest_output_data():
     """
@@ -56,3 +55,98 @@ def test_lookup_from_synonym_file():
 
     assert 6 == len(result_set)
     assert expected_results == result_set
+
+def test_find_condition_information_tokenized():
+    """
+    test the results of the find_condition_information function with the tokenized method
+
+    ingest_fhir_data and ingest_output_data are prerequisites for this to work correctly
+    """
+
+    #run prereqs
+    fhir_data_dir = 'test/fixture/fhir_stu3'
+    fhir_helper.ingest_fhir_data(fhir_data_dir)
+    output_file = 'test/fixture/output.tsv'
+    stemmer = 'Porter'
+    tokenizer = 'whitespace'
+    stopword = 'aggressive'
+    fhir_helper.ingest_output_data(output_file, stemmer, tokenizer, stopword)
+
+    # now test this functionality
+    conditions = ['abscess']
+    query_method = 'tokenized'
+    similarity_metric = 'cosine'
+    stemmer = 'Porter'
+    tokenizer = 'whitespace'
+    threshold = 0.0
+
+    expected_results = [('abscess, brain', 0.707), ('abscess, kidney', 0.707),
+                        ('abscess, liver', 0.707), ('abscess, lung, chronic', 0.707),
+                        ('abscess, periurethral', 0.707)]
+
+    results = fhir_helper.find_condition_information(conditions, query_method, similarity_metric,
+                                                     stemmer, tokenizer, threshold)
+
+    assert 5 == len(results)
+    assert expected_results == results
+
+def test_find_condition_information_tfidf():
+    """
+    test the results of the find_condition_information function with the tfidf method
+    """
+
+    conditions = ['abscess']
+    query_method = 'tfidf'
+    similarity_metric = 'cosine'
+    stemmer = 'Porter'
+    tokenizer = 'whitespace'
+    threshold = 0.0
+
+    expected_results = [('abscess, brain', 0.5487356969084024),
+                        ('abscess, kidney', 0.5487356969084024),
+                        ('abscess, liver', 0.5487356969084024),
+                        ('abscess, periurethral', 0.5487356969084024),
+                        ('abscess, lung, chronic', 0.42099864092607153)]
+
+    results = fhir_helper.find_condition_information(conditions, query_method, similarity_metric,
+                                                     stemmer, tokenizer, threshold)
+    assert 5 == len(results)
+    assert expected_results == results
+
+def test_find_condition_information_subset():
+    """
+    test the results of find_condition_information function with the subset method
+    """
+
+    conditions = ['abscess']
+    query_method = 'subset'
+    similarity_metric = 'cosine'
+    stemmer = 'Porter'
+    tokenizer = 'whitespace'
+    threshold = 0.0
+
+    expected_results = {'abscess, lung, chronic', 'abscess, liver', 'abscess, kidney',
+                        'abscess, periurethral', 'abscess, brain'}
+
+    results = fhir_helper.find_condition_information(conditions, query_method, similarity_metric,
+                                                     stemmer, tokenizer, threshold)
+
+    assert 5 == len(results)
+    assert expected_results == set(results)
+
+def test_find_condition_information_none():
+    """
+    test the results of find_condition_information function with None as the method
+    """
+
+    conditions = ['Stroke']
+    query_method = None
+    similarity_metric = 'cosine'
+    stemmer = 'Porter'
+    tokenizer = 'whitespace'
+    threshold = 0.0
+
+    results = fhir_helper.find_condition_information(conditions, query_method, similarity_metric,
+                                                     stemmer, tokenizer, threshold)
+
+    assert [] == results

@@ -97,23 +97,40 @@ def find_condition_information(conditions, query_method, similarity_metric, stem
                                tokenizer, threshold=0.0):
     """
     find condition information
-    """
-    # right now, test data and output_data needs to be in memory to work
-    # we would like to expand this for
-    #    1) partial matches
-    #    2) synonyms
-    #    3) case differences
+    right now, test data and output_data needs to be in memory to work
+    we would like to expand this for
+        1) partial matches
+        2) synonyms
+        3) case differences
 
-    # this is the subset solution
+    @param: conditions: a list of conditions to check
+    @param: query_method: one of tfidf, tokenized, subset
+    @param: similarity_metric: the way to score the results
+    @param: stemmer: one of Porter, Snowball
+    @param: tokenizer: one of whitespace, nltk
+    @param: threshold: the minimum score for a result to be returned
+    @type: conditions: list
+    @type: query_method: string
+    @type: similarity_metric: string
+    @type: stemmer: string
+    @type: tokenizer: string
+    @type: threshold: float
+    @return: the found results
+    @rtype: list
+    """
+
     if 'subset' == query_method:
-        return subset_search.find_subset_variety(output_dict, conditions)
+        # this is the subset solution
+        return list(subset_search.find_subset_variety(output_dict, conditions))
     elif 'tfidf' == query_method:
         # this is perhaps even more sophisticated
         return tfidf_search.find_tfidf_variety(output_dict, conditions, threshold)
-    else:
+    elif 'tokenized' == query_method:
         # this is a slight more sophisticated token based matching solution
         return tokenized_search.find_tokenized_variety(
             output_token_dict, conditions, threshold, similarity_metric, stemmer, tokenizer)
+    else:
+        return []
 
 def lookup_medlineplus(base_url, user_query, html_lookups_file):
     """

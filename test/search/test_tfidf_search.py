@@ -26,6 +26,8 @@ output_token_dict = {'Aneurysm, aorta or branches': ['Aneurysm', 'aorta', 'branc
 
 def test_find_tfidf_variety():
     threshold = 0.0
+    # force reload of training data
+    tfidf_search.train_x = None
 
     expected_top_result = ('Aneurysm, aortic', 0.4559686538756185)
     expected_matches = 6
