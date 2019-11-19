@@ -18,7 +18,6 @@ from util import dedup_medfind
 test_data_dict = dict()
 
 output_dict = dict()
-
 output_token_dict = dict()
 
 # this is a tsv file
@@ -30,9 +29,9 @@ def ingest_output_data(output_file, stemmer, tokenizer_str, stopword_str):
         lines = fs.readlines()
 
     for line in lines:
-        parts = line.split('\t')
+        parts = line.strip().split('\t')
         condition = parts[0].lower()
-        related_data = parts[0:]
+        related_data = parts[1:]
         output_dict[condition] = related_data
 
         if 'whitespace' == tokenizer_str:
