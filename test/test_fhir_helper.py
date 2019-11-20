@@ -6,7 +6,9 @@ Created on Nov 18, 2019
 
 import os
 from shutil import copyfile
+from unittest import mock
 import fhir_helper
+from mocks import url_mocks
 
 def test_ingest_output_data():
     """
@@ -153,6 +155,7 @@ def test_find_condition_information_none():
 
     assert [] == results
 
+@mock.patch('fhir_helper.urlopen', url_mocks.offline_medline_plus)
 def test_lookup_medlineplus():
 
     base_url = 'https://medlineplus.gov/'

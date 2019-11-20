@@ -147,7 +147,6 @@ def lookup_medlineplus(base_url, user_query, html_lookups_file):
     """
     # need the lowercase version of the query to have any shot
     medlineplus_url = base_url + user_query.lower().replace(' ', '') + '.html'
-    print(medlineplus_url)
     alts = set()
     try:
         f = urlopen(medlineplus_url)
