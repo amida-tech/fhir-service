@@ -164,7 +164,6 @@ def lookup_medlineplus(base_url, user_query, html_lookups_file):
                 fs.write(user_query + '\t'  + alt + '\n')
     except Exception as e:
         print('Failed to perform medlineplus lookup: '+ str(e))
-        pass
 
     # this should contain medfind stuff, icd10data and pre-exisiting synonyms
     alts.update(lookup_from_synonym_file(user_query, html_lookups_file))
@@ -176,7 +175,7 @@ def lookup_icd10data(base_url, user_query, html_lookups_file):
     lookup icd10data from the web
     """
     url = base_url + 'search?s=' + user_query
-    alts = []
+    alts = set()
     try:
         f = urlopen(url)
         myfile = f.read()
@@ -198,16 +197,16 @@ def lookup_icd10data(base_url, user_query, html_lookups_file):
                 approximate_list = span_line.find_next_sibling()
                 synonyms = approximate_list.find_all('li')
                 for synonym in synonyms:
-                    alts.append(synonym.text)
+                    alts.add(synonym.text)
 
         with open(html_lookups_file, 'a', encoding='utf-8') as fs:
             for alt in alts:
                 fs.write(user_query + '\t'  + alt + '\n')
-    except:
-        pass
+    except Exception as e:
+        print('Failed to perform icd10data lookup: '+ str(e))
 
     # this should contain medfind stuff, icd10data and pre-exisiting synonyms
-    alts += list(lookup_from_synonym_file(user_query, html_lookups_file))
+    alts.update(lookup_from_synonym_file(user_query, html_lookups_file))
 
     return alts
 
@@ -263,8 +262,8 @@ def main(config_dict):
         if user_query not in more_candidates:
             more_candidates.append(user_query.lower())
 
-        more_candidates += lookup_icd10data(config_dict['BASE_ICD_URL'],
-                                            user_query, config_dict['HTML_LOOKUP_FILE'])
+        more_candidates += list(lookup_icd10data(config_dict['BASE_ICD_URL'],
+                                            user_query, config_dict['HTML_LOOKUP_FILE']))
 
         candidates = find_condition_information(
             more_candidates, config_dict['QUERY_METHOD'],
@@ -316,8 +315,8 @@ def main_test(config_dict):
             if user_query not in more_candidates:
                 more_candidates.append(user_query.lower())
 
-            more_candidates += lookup_icd10data(config_dict['BASE_ICD_URL'],
-                                                user_query, config_dict['HTML_LOOKUP_FILE'])
+            more_candidates += list(lookup_icd10data(config_dict['BASE_ICD_URL'],
+                                                user_query, config_dict['HTML_LOOKUP_FILE']))
 
             candidates = find_condition_information(
                 more_candidates, config_dict['QUERY_METHOD'],

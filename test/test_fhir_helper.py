@@ -180,3 +180,31 @@ def test_lookup_medlineplus():
     assert expected_results == result
     # now check the file
     assert set(expected_results) <= set(lines)
+
+@mock.patch('fhir_helper.urlopen', url_mocks.offline_icd10data)
+def test_lookup_icd10data():
+
+    base_url = 'https://www.icd10data.com/'
+    user_query = 'Cancer'
+
+    #original location
+    html_lookup_file = 'test/fixture/html_lookup_file.txt'
+    #create a copy to maintain integrity of file
+    test_filename_working = 'test/fixture/html_lookup_file_copy.txt'
+    copyfile(html_lookup_file, test_filename_working)
+    
+    result = fhir_helper.lookup_icd10data(base_url, user_query, test_filename_working)
+    with open(test_filename_working, 'r', encoding='utf-8') as fs:
+        lines = [line.strip().split('\t')[1].strip() for line in fs.readlines()]
+
+    # delete our working copy before performing asserts
+    os.remove(test_filename_working)
+
+    expected_results = {'Agranulocytosis due to cancer chemotherapy',
+                        'Chemotherapy-induced neutropenia',
+                        'Neutropenia due to chemotherapy'}
+
+    assert 3 == len(result)
+    assert expected_results == result
+    # now check the file
+    assert set(expected_results) <= set(lines)

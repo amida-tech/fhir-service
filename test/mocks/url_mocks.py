@@ -32,7 +32,22 @@ def _mock_response(self, status=200, content="CONTENT", json_data=None, raise_fo
 def offline_medline_plus(url):
     print('Mocking opening the url ' + url)
     if 'https://medlineplus.gov/cancer.html' == url:
-        with open('test/fixture/cancer_content.txt', 'r', encoding='utf-8') as fs:
+        with open('test/fixture/medline_plus/cancer_content.txt', 'r', encoding='utf-8') as fs:
+            lines = fs.readlines()
+        content =  '\n'.join(lines)
+    else:
+        content = ''
+    response = _mock_response('', status = 200, content = content)
+    return response
+
+def offline_icd10data(url):
+    print('Mocking opening the url ' + url)
+    if 'https://www.icd10data.com/search?s=Cancer' == url:
+        with open('test/fixture/icd10data/cancer_initial_results.txt', 'r', encoding='utf-8') as fs:
+            lines = fs.readlines()
+        content =  '\n'.join(lines)
+    elif 'https://www.icd10data.com/ICD10CM/Codes/D50-D89/D70-D77/D70-/D70.1' == url:
+        with open('test/fixture/icd10data/cancer_content.txt', 'r', encoding='utf-8') as fs:
             lines = fs.readlines()
         content =  '\n'.join(lines)
     else:
