@@ -213,6 +213,11 @@ def lookup_icd10data(base_url, user_query, html_lookups_file):
 def get_console_input(mode):
     """
     query the console input for console mode
+    
+    @param: mode: Are we in the initial state or the concluding state
+    @type: mode: bool
+    @return: User input
+    @rtype: str
     """
     if mode:
         choice = input('Which condition do you wish to look up?\n\n')

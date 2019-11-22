@@ -26,31 +26,37 @@ def _mock_response(self, status=200, content="CONTENT", json_data=None, raise_fo
         mock_resp.json = mock.Mock(return_value=json_data)
 
     mock_resp.read = lambda: content
-    
+
     return mock_resp
 
 def offline_medline_plus(url):
+    """
+    testing medline_plus url call
+    """
     print('Mocking opening the url ' + url)
     if 'https://medlineplus.gov/cancer.html' == url:
         with open('test/fixture/medline_plus/cancer_content.txt', 'r', encoding='utf-8') as fs:
             lines = fs.readlines()
-        content =  '\n'.join(lines)
+        content = '\n'.join(lines)
     else:
         content = ''
-    response = _mock_response('', status = 200, content = content)
+    response = _mock_response('', status=200, content=content)
     return response
 
 def offline_icd10data(url):
+    """
+    testing icd10data url call
+    """
     print('Mocking opening the url ' + url)
     if 'https://www.icd10data.com/search?s=Cancer' == url:
         with open('test/fixture/icd10data/cancer_initial_results.txt', 'r', encoding='utf-8') as fs:
             lines = fs.readlines()
-        content =  '\n'.join(lines)
+        content = '\n'.join(lines)
     elif 'https://www.icd10data.com/ICD10CM/Codes/D50-D89/D70-D77/D70-/D70.1' == url:
         with open('test/fixture/icd10data/cancer_content.txt', 'r', encoding='utf-8') as fs:
             lines = fs.readlines()
-        content =  '\n'.join(lines)
+        content = '\n'.join(lines)
     else:
         content = ''
-    response = _mock_response('', status = 200, content = content)
+    response = _mock_response('', status=200, content=content)
     return response
