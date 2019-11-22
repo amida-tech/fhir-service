@@ -8,7 +8,7 @@ import os
 from shutil import copyfile
 from unittest import mock
 import fhir_helper
-from mocks import url_mocks
+from test.mocks import url_mocks
 
 def test_ingest_output_data():
     """
