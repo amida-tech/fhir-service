@@ -225,12 +225,17 @@ def get_console_input(mode):
         choice = input('Which of these makes sense to you?\n\n')
     return choice
 
-def display_matching_information(choice):
+def display_matching_information(condition):
     """
     lookup output dictionary for key value
+    
+    @param: condition: the medical condition to lookup in output_dict
+    @type: condition: string
+    @return: the values in the VASRD associated with that condition
+    @rtype: list
     """
-    print(output_dict[choice])
-    return output_dict[choice]
+    print(output_dict[condition])
+    return output_dict[condition]
 
 def main(config_dict):
     """

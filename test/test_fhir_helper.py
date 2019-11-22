@@ -157,7 +157,9 @@ def test_find_condition_information_none():
 
 @mock.patch('fhir_helper.urlopen', url_mocks.offline_medline_plus)
 def test_lookup_medlineplus():
-
+    """
+    test lookup_medlineplus function
+    """
     base_url = 'https://medlineplus.gov/'
     user_query = 'Cancer'
 
@@ -183,7 +185,9 @@ def test_lookup_medlineplus():
 
 @mock.patch('fhir_helper.urlopen', url_mocks.offline_icd10data)
 def test_lookup_icd10data():
-
+    """
+    test lookup_icd10data function
+    """
     base_url = 'https://www.icd10data.com/'
     user_query = 'Cancer'
 
@@ -210,9 +214,27 @@ def test_lookup_icd10data():
     assert set(expected_results) <= set(lines)
 
 def test_get_console_input_true():
+    """
+        test get_console_input for a True parameter
+    """
     with mock.patch('builtins.input', return_value='dew'):
         assert fhir_helper.get_console_input(True) == 'dew'
 
 def test_get_console_input_false():
+    """
+        test get_console_input for a False parameter
+    """
     with mock.patch('builtins.input', return_value='dew'):
         assert fhir_helper.get_console_input(False) == 'dew'
+
+def test_get_display_matching_information():
+    """
+    test get_display_matching_information function for a sample condition
+    """
+    single_condition = 'Abdominal pain, etiology unknown'.lower()
+    single_value = ['7399-7319', 'GI Stomach & duodenum', 'Stomach',
+                    'Digestive (Digestive Conditions, Misc.)']
+    fhir_helper.output_dict = {}
+    fhir_helper.output_dict[single_condition] = single_value
+    result = fhir_helper.display_matching_information(single_condition)
+    assert single_value == result
