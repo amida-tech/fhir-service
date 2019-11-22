@@ -34,7 +34,7 @@ def offline_medline_plus(url):
     testing medline_plus url call
     """
     print('Mocking opening the url ' + url)
-    if 'https://medlineplus.gov/cancer.html' == url:
+    if url == 'https://medlineplus.gov/cancer.html':
         with open('test/fixture/medline_plus/cancer_content.txt', 'r', encoding='utf-8') as fs:
             lines = fs.readlines()
         content = '\n'.join(lines)
@@ -48,11 +48,11 @@ def offline_icd10data(url):
     testing icd10data url call
     """
     print('Mocking opening the url ' + url)
-    if 'https://www.icd10data.com/search?s=Cancer' == url:
+    if url == 'https://www.icd10data.com/search?s=Cancer':
         with open('test/fixture/icd10data/cancer_initial_results.txt', 'r', encoding='utf-8') as fs:
             lines = fs.readlines()
         content = '\n'.join(lines)
-    elif 'https://www.icd10data.com/ICD10CM/Codes/D50-D89/D70-D77/D70-/D70.1' == url:
+    elif url == 'https://www.icd10data.com/ICD10CM/Codes/D50-D89/D70-D77/D70-/D70.1':
         with open('test/fixture/icd10data/cancer_content.txt', 'r', encoding='utf-8') as fs:
             lines = fs.readlines()
         content = '\n'.join(lines)

@@ -1,0 +1,21 @@
+# this file lists all the configurations for the operation of fhir_helper
+# it allows commented lines like so
+# all the other rows are to be tab-separated.
+# the first column is the property name
+# the second (and possibly more) columns are all values if a property is multi-valued.
+
+# blank lines are also skipped as they are solely for readability
+
+OUTPUT_DATA_FILE	data/output.tsv
+FHIR_DATA_DIR	data/fhir_stu3
+TEXT_LIST_FILE	output/text_list.tsv
+HTML_LOOKUP_FILE	data/medfind.txt
+
+SIMILARITY_METRIC	cosine
+QUERY_METHOD	tokenized
+STEMMER	Porter
+TOKENIZER	whitespace
+STOPWORD	aggressive
+
+BASE_ICD_URL	'https://www.icd10data.com/'
+BASE_MEDLINEPLUS_URL	'https://medlineplus.gov/'

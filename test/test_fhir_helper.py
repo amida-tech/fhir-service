@@ -42,8 +42,8 @@ def test_ingest_fhir_data():
     condition = 'Viral sinusitis (disorder)'
 
     #test_data_dict are populated
-    assert 11 == len(fhir_helper.test_data_dict)
-    assert 4 == fhir_helper.test_data_dict[condition]
+    assert len(fhir_helper.test_data_dict) == 11
+    assert fhir_helper.test_data_dict[condition] == 4
 
 def test_lookup_from_synonym_file():
     """
@@ -57,7 +57,7 @@ def test_lookup_from_synonym_file():
 
     result_set = fhir_helper.lookup_from_synonym_file(query, html_lookup_file)
 
-    assert 6 == len(result_set)
+    assert len(result_set) == 6
     assert expected_results == result_set
 
 def test_find_condition_information_tokenized():
@@ -91,7 +91,7 @@ def test_find_condition_information_tokenized():
     results = fhir_helper.find_condition_information(conditions, query_method, similarity_metric,
                                                      stemmer, tokenizer, threshold)
 
-    assert 5 == len(results)
+    assert len(results) == 5
     assert expected_results == results
 
 def test_find_condition_information_tfidf():
@@ -114,7 +114,7 @@ def test_find_condition_information_tfidf():
 
     results = fhir_helper.find_condition_information(conditions, query_method, similarity_metric,
                                                      stemmer, tokenizer, threshold)
-    assert 5 == len(results)
+    assert len(results) == 5
     assert expected_results == results
 
 def test_find_condition_information_subset():
@@ -135,7 +135,7 @@ def test_find_condition_information_subset():
     results = fhir_helper.find_condition_information(conditions, query_method, similarity_metric,
                                                      stemmer, tokenizer, threshold)
 
-    assert 5 == len(results)
+    assert len(results) == 5
     assert expected_results == set(results)
 
 def test_find_condition_information_none():
@@ -178,7 +178,7 @@ def test_lookup_medlineplus():
 
     expected_results = {'Carcinoma', 'Malignancy', 'Neoplasms', 'Tumor'}
 
-    assert 4 == len(result)
+    assert len(result) == 4
     assert expected_results == result
     # now check the file
     assert set(expected_results) <= set(lines)
@@ -208,7 +208,7 @@ def test_lookup_icd10data():
                         'Chemotherapy-induced neutropenia',
                         'Neutropenia due to chemotherapy'}
 
-    assert 3 == len(result)
+    assert len(result) == 3
     assert expected_results == result
     # now check the file
     assert set(expected_results) <= set(lines)
@@ -238,3 +238,19 @@ def test_get_display_matching_information():
     fhir_helper.output_dict[single_condition] = single_value
     result = fhir_helper.display_matching_information(single_condition)
     assert single_value == result
+
+def test_ingest_config_file_config():
+    """
+    test ingest_config_file function for config.txt
+    """
+    config_file = 'test/fixture/config/config.txt'
+    result = fhir_helper.ingest_config_file(config_file)
+    assert len(result) == 11
+
+def test_ingest_config_file_config_test():
+    """
+    test ingest_config_file function for config_test.txt
+    """
+    config_file = 'test/fixture/config/config_test.txt'
+    result = fhir_helper.ingest_config_file(config_file)
+    assert len(result) == 12

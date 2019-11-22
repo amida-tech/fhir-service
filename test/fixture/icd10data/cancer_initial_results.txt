@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Search Page 1/20: Cancer</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" id="lnkShortcutIcon" href="/images/icd10data_ico.png">
+    <link rel="apple-touch-icon" href="/images/icd10data_ico.png">
+    
+  
+    <link href="/c/c?v=SJ8VLKg0rujx6k66vUvbpm5rGK86z7rXosgfiExVZo81" rel="stylesheet"/>
+
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PSG87ZD');</script>
+    <!-- End Google Tag Manager -->
+    <!--[if lt IE 9]>
+        <script src="/scripts/html5shiv.js"></script>
+        <script src="/scripts/respond.min.js"></script>
+    <![endif]-->
+
+    <script>
+    var propertag = propertag || {};
+    propertag.cmd = propertag.cmd || [];
+    (function() {
+    var pm = document.createElement('script');
+    pm.async = true; pm.type = 'text/javascript';
+    var is_ssl = 'https:' == document.location.protocol;
+    pm.src = (is_ssl ? 'https:' : 'http:') + '//global.proper.io/icd10data.min.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(pm, node);
+    })();
+    </script>
+
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PSG87ZD"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="hellobarContainer"></div>
+
+
+    <div class="navbar navbar-custom navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <img width="266" height="39" class="img-responsive" src="/images/ICD10Data.com266x45.png" />
+                </a>
+            </div>
+
+            <div>
+                <div class="x81">
+                    <div class="form-group">
+                        <div class="input-group">
+                                    <input type="text" value="Cancer" maxlength="64" class="form-control" id="searchText">
+
+                            <div class="input-group-btn bs-dropdown-to-select-group">
+                                <input id="selectedvalue" name="selectedvalue" type="hidden">
+                                <button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown">
+                                    <span style="font-size:smaller;" id="bs-drp-sel-label">Search All ICD-10</span>
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li style="font-size:smaller;" id="icd10all">
+                                        <a href="#">Search All ICD-10</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li style="font-size:smaller;" id="icd10cm"><a href="#">ICD-10-CM Diagnosis Codes</a></li>
+                                    <li style="font-size:smaller;" id="icd10pcs"><a href="#">ICD-10-PCS Procedure Codes</a></li>
+                                    <li class="divider"></li>
+                                    <li style="font-size:smaller;" id="icd10cmindex"><a href="#">ICD-10-CM Diagnosis Index</a></li>
+                                    <li style="font-size:smaller;" id="icd10cmeindex"><a href="#">ICD-10-CM External Causes Index</a></li>
+                                    <li class="divider"></li>
+                                    <li style="font-size:smaller;" id="icd10cmtabledrugs"><a href="#">ICD-10-CM Table of Drugs</a></li>
+                                    <li style="font-size:smaller;" id="icd10cmtableneoplasms"><a href="#">ICD-10-CM Table of Neoplasms</a></li>
+                                    <li class="divider"></li>
+                                    <li style="font-size:smaller;" id="hcpcs"><a href="#">HCPCS Codes</a></li>
+                                    <li class="divider"></li>
+                                    <li style="font-size:smaller;" id="icd9volume1"><a href="#">ICD-9-CM Diagnosis Codes</a></li>
+                                    <li style="font-size:smaller;" id="icd9volume3"><a href="#">ICD-9-CM Procedure Codes</a></li>
+                                    <li class="divider"></li>
+                                    <li style="font-size:smaller;" id="alldata"><a href="#">Search All Data</a></li>
+                                </ul>
+                                <button type="submit" id="search" class="btn btn-default" tabindex="-1"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse">
+                <p class="navbar-text u791">
+                    <strong>2019/2020</strong>
+                </p>
+                <ul id="navMenu" class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Codes <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/ICD10CM/Codes">ICD-10-CM Codes</a></li>
+                            <li><a href="/ICD10PCS/Codes">ICD-10-PCS Codes</a></li>
+                            <li><a href="http://www.icd9data.com">Legacy ICD-9-CM Codes</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Indexes <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/ICD10CM/Index">ICD-10-CM Index</a></li>
+                            <li><a href="/ICD10CM/EIndex">ICD-10-CM External Causes Index</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/ICD10CM/Table_Of_Drugs">Table of Drugs</a></li>
+                            <li><a href="/ICD10CM/Table_Of_Neoplasms">Table of Neoplasms</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/Convert">Conversion</a></li>
+
+                    <li><a href="/ICD10CM/DRG">DRG</a></li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Rules <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">ICD-10-CM</li>
+                            <li><a href="/ICD10CM/Codes/Rules/Newborn_Codes">Newborn Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Pediatric_Codes">Pediatric Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Adult_Codes">Adult Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Maternity_Codes">Maternity Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Female_Diagnosis_Codes">Female Only Diagnosis Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Male_Diagnosis_Codes">Male Only Diagnosis Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Manifestation_Codes">Manifestation Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Present_On_Admission_Exempt">POA Exempt Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Questionable_Dx_Codes">Questionable Admission Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Billable_Specific_Codes">Billable/Specific Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Rules/Non_Billable_Specific_Codes">Non-Billable/Non-Specific Codes</a></li>
+                            <li class="dropdown-header">ICD-10-PCS</li>
+                            <li><a href="/ICD10PCS/Codes/Rules/Female_Procedure_Codes">Female Only Procedure Codes</a></li>
+                            <li><a href="/ICD10PCS/Codes/Rules/Male_Procedure_Codes">Male Only Procedure Codes</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Analytics <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/ICD10CM/Analytics/Applicable_To_Crosswalk">Applicable To Crosswalk</a></li>
+                            <li><a href="/ICD10CM/Analytics/Code_Also_Crosswalk">Code Also Crosswalk</a></li>
+                            <li><a href="/ICD10CM/Analytics/Code_First_Crosswalk">Code First Crosswalk</a></li>
+                            <li><a href="/ICD10CM/Analytics/Includes_Crosswalk">Includes Crosswalk</a></li>
+                            <li><a href="/ICD10CM/Analytics/Note_Crosswalk">Note Crosswalk</a></li>
+                            <li><a href="/ICD10CM/Analytics/Type1_Excludes_Crosswalk">Type 1 Excludes Crosswalk</a></li>
+                            <li><a href="/ICD10CM/Analytics/Type2_Excludes_Crosswalk">Type 2 Excludes Crosswalk</a></li>
+                            <li><a href="/ICD10CM/Analytics/Use_Additional_Crosswalk">Use Additional Crosswalk</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Changes <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">ICD-10-CM</li>
+                            <li><a href="/ICD10CM/Codes/Changes/New_Codes">New 2020 Codes</a></li>
+                            <li><a href="/ICD10CM/Codes/Changes/Revised_Codes">Codes Revised in 2020</a></li>
+                            <li><a href="/ICD10CM/Codes/Changes/Deleted_Codes">Codes Deleted in 2020</a></li>
+                            <li class="dropdown-header">ICD-10-PCS</li>
+                            <li><a href="/ICD10PCS/Codes/Changes/New_Codes">New 2020 Codes</a></li>
+                            <li><a href="/ICD10PCS/Codes/Changes/Revised_Codes">Codes Revised in 2020</a></li>
+                            <li><a href="/ICD10PCS/Codes/Changes/Deleted_Codes">Codes Deleted in 2020</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">HCPCS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://www.hcpcsdata.com/Codes">Codes</a></li>
+                            <li><a href="https://www.hcpcsdata.com/Modifiers">Modifiers</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/LicenseICD10Data">License Data Files</a></li>
+                    <li><a href="/Disclaimer">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container vp">
+       <div class="row">
+           <div class="col-sm-8">
+                <div class="body-content">
+                    
+
+
+
+
+
+<div class="proper-ad-leaderboard">
+    <div class="proper-ad-unit">
+        <div id="proper-ad-icd10data_leaderboard"> <script> propertag.cmd.push(function() { proper_display('icd10data_leaderboard'); }); </script> </div>
+    </div>
+</div>
+
+
+        <h2 class="pageHeading">Search Results</h2>
+            <p>500 results found. Showing 1-25:</p>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/D50-D89/D70-D77/D70-/D70.1">ICD-10-CM Diagnosis Code <span class="identifier">D70.1</span></a></strong> <div data-titledivname="z3546" data-textdivname="x3546" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D70.1">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Agranulocytosis secondary to <span class="highlight">cancer</span> chemotherapy</div><div class="img i3"><span class="searchKeywords">Agranulocytosis due to <span class="highlight">cancer</span> chemotherapy; Chemotherapy-induced neutropenia; Neutropenia due to chemotherapy; underlying neoplasm; code for adverse effect, if applicable, to identify drug (T45.1X5)</span></div></div><div id="z3546" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D70.1</span></div><div id="x3546" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Agranulocytosis secondary to cancer chemotherapy</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul><div><span>Code Also</span><ul><li>underlying neoplasm</li></ul></div><div><span>Use Additional</span><ul><li>code for adverse effect, if applicable, to identify drug (<a class="identifier" href="/ICD10CM/Codes/S00-T88/T36-T50/T45-/T45.1X5">T45.1X5</a>)</li></ul></div></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/R00-R99/R97-R97/R97-/R97.1">ICD-10-CM Diagnosis Code <span class="identifier">R97.1</span></a></strong> <div data-titledivname="z29727" data-textdivname="x29727" class="tip images-note"></div> <a class="convertSmall" href="/Convert/R97.1">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Elevated <span class="highlight">cancer</span> antigen 125 [CA 125]</div><div class="img i3"><span class="searchKeywords">Elevated ca 125 measurement; Increased <span class="highlight">cancer</span> antigen 125</span></div></div><div id="z29727" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">R97.1</span></div><div id="x29727" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Elevated cancer antigen 125 [CA 125]</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/O00-O9A/O94-O9A/O9A-/O9A.12">ICD-10-CM Diagnosis Code <span class="identifier">O9A.12</span></a></strong> <div data-titledivname="z27253" data-textdivname="x27253" class="tip images-note"></div> <a class="convertSmall" href="/Convert/O9A.12">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Malignant neoplasm complicating childbirth</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> in childbirth</span></div></div><div id="z27253" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">O9A.12</span></div><div id="x27253" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Malignant neoplasm complicating childbirth</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> <span class="label codebadge label-info">Maternity Dx (12-55 years)</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/Z00-Z99/Z00-Z13/Z12-/Z12.12">ICD-10-CM Diagnosis Code <span class="identifier">Z12.12</span></a></strong> <div data-titledivname="z93252" data-textdivname="x93252" class="tip images-note"></div> <a class="convertSmall" href="/Convert/Z12.12">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Encounter for screening for malignant neoplasm of rectum</div><div class="img i3"><span class="searchKeywords">Screening for rectal <span class="highlight">cancer</span>; Screening for rectal <span class="highlight">cancer</span> done</span></div></div><div id="z93252" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">Z12.12</span></div><div id="x93252" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Encounter for screening for malignant neoplasm of rectum</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> <span class="label codebadge label-info">POA Exempt</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/Z00-Z99/Z00-Z13/Z12-/Z12.73">ICD-10-CM Diagnosis Code <span class="identifier">Z12.73</span></a></strong> <div data-titledivname="z93264" data-textdivname="x93264" class="tip images-note"></div> <a class="convertSmall" href="/Convert/Z12.73">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Encounter for screening for malignant neoplasm of ovary</div><div class="img i3"><span class="searchKeywords">Screening for ovarian <span class="highlight">cancer</span>; Screening for ovarian <span class="highlight">cancer</span> done</span></div></div><div id="z93264" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">Z12.73</span></div><div id="x93264" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Encounter for screening for malignant neoplasm of ovary</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> <span class="label codebadge label-info">POA Exempt</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/Z00-Z99/Z00-Z13/Z12-/Z12.83">ICD-10-CM Diagnosis Code <span class="identifier">Z12.83</span></a></strong> <div data-titledivname="z93269" data-textdivname="x93269" class="tip images-note"></div> <a class="convertSmall" href="/Convert/Z12.83">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Encounter for screening for malignant neoplasm of skin</div><div class="img i3"><span class="searchKeywords">Screening for skin <span class="highlight">cancer</span>; Screening for skin <span class="highlight">cancer</span> done</span></div></div><div id="z93269" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">Z12.83</span></div><div id="x93269" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Encounter for screening for malignant neoplasm of skin</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> <span class="label codebadge label-info">POA Exempt</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/C45-C49/C46-/C46.0">ICD-10-CM Diagnosis Code <span class="identifier">C46.0</span></a></strong> <div data-titledivname="z1746" data-textdivname="x1746" class="tip images-note"></div> <a class="convertSmall" href="/Convert/C46.0">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Kaposi's sarcoma of skin</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> of the skin, kaposi sarcoma</span></div></div><div id="z1746" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">C46.0</span></div><div id="x1746" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Kaposi's sarcoma of skin</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/C45-C49/C46-/C46.2">ICD-10-CM Diagnosis Code <span class="identifier">C46.2</span></a></strong> <div data-titledivname="z1748" data-textdivname="x1748" class="tip images-note"></div> <a class="convertSmall" href="/Convert/C46.2">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Kaposi's sarcoma of palate</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> of the palate, kaposi sarcoma</span></div></div><div id="z1748" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">C46.2</span></div><div id="x1748" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Kaposi's sarcoma of palate</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/C69-C72/C70-/C70.0">ICD-10-CM Diagnosis Code <span class="identifier">C70.0</span></a></strong> <div data-titledivname="z2026" data-textdivname="x2026" class="tip images-note"></div> <a class="convertSmall" href="/Convert/C70.0">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Malignant neoplasm of cerebral meninges</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> of the cerebral meninges</span></div></div><div id="z2026" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">C70.0</span></div><div id="x2026" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Malignant neoplasm of cerebral meninges</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/C76-C80/C78-/C78.1">ICD-10-CM Diagnosis Code <span class="identifier">C78.1</span></a></strong> <div data-titledivname="z2148" data-textdivname="x2148" class="tip images-note"></div> <a class="convertSmall" href="/Convert/C78.1">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Secondary malignant neoplasm of mediastinum</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> metastatic to mediastinum</span></div></div><div id="z2148" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">C78.1</span></div><div id="x2148" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Secondary malignant neoplasm of mediastinum</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/C76-C80/C79-/C79.32">ICD-10-CM Diagnosis Code <span class="identifier">C79.32</span></a></strong> <div data-titledivname="z2172" data-textdivname="x2172" class="tip images-note"></div> <a class="convertSmall" href="/Convert/C79.32">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Secondary malignant neoplasm of cerebral meninges</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> metastatic to cerebral meninges</span></div></div><div id="z2172" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">C79.32</span></div><div id="x2172" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Secondary malignant neoplasm of cerebral meninges</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/C76-C80/C79-/C79.52">ICD-10-CM Diagnosis Code <span class="identifier">C79.52</span></a></strong> <div data-titledivname="z2178" data-textdivname="x2178" class="tip images-note"></div> <a class="convertSmall" href="/Convert/C79.52">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Secondary malignant neoplasm of bone marrow</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> metastatic to bone marrow</span></div></div><div id="z2178" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">C79.52</span></div><div id="x2178" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Secondary malignant neoplasm of bone marrow</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/D00-D09/D00-/D00.07">ICD-10-CM Diagnosis Code <span class="identifier">D00.07</span></a></strong> <div data-titledivname="z2774" data-textdivname="x2774" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D00.07">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Carcinoma in situ of tongue</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> in situ of tongue</span></div></div><div id="z2774" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D00.07</span></div><div id="x2774" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Carcinoma in situ of tongue</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/D00-D09/D00-/D00.1">ICD-10-CM Diagnosis Code <span class="identifier">D00.1</span></a></strong> <div data-titledivname="z2776" data-textdivname="x2776" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D00.1">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Carcinoma in situ of esophagus</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> in situ of esophagus</span></div></div><div id="z2776" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D00.1</span></div><div id="x2776" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Carcinoma in situ of esophagus</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/D00-D09/D01-/D01.2">ICD-10-CM Diagnosis Code <span class="identifier">D01.2</span></a></strong> <div data-titledivname="z2781" data-textdivname="x2781" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D01.2">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Carcinoma in situ of rectum</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> in situ of rectum</span></div></div><div id="z2781" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D01.2</span></div><div id="x2781" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Carcinoma in situ of rectum</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/D00-D09/D09-/D09.0">ICD-10-CM Diagnosis Code <span class="identifier">D09.0</span></a></strong> <div data-titledivname="z2895" data-textdivname="x2895" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D09.0">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Carcinoma in situ of bladder</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> in situ of urinary bladder</span></div></div><div id="z2895" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D09.0</span></div><div id="x2895" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Carcinoma in situ of bladder</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/D10-D36/D14-/D14.2">ICD-10-CM Diagnosis Code <span class="identifier">D14.2</span></a></strong> <div data-titledivname="z2948" data-textdivname="x2948" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D14.2">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Benign neoplasm of trachea</div><div class="img i3"><span class="searchKeywords">Tracheal tumor, benign (not <span class="highlight">cancer</span>)</span></div></div><div id="z2948" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D14.2</span></div><div id="x2948" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Benign neoplasm of trachea</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/D10-D36/D28-/D28.0">ICD-10-CM Diagnosis Code <span class="identifier">D28.0</span></a></strong> <div data-titledivname="z3109" data-textdivname="x3109" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D28.0">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Benign neoplasm of vulva</div><div class="img i3"><span class="searchKeywords">Benign (not <span class="highlight">cancer</span>) neoplasm of vulva</span></div></div><div id="z3109" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D28.0</span></div><div id="x3109" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Benign neoplasm of vulva</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/D10-D36/D28-/D28.1">ICD-10-CM Diagnosis Code <span class="identifier">D28.1</span></a></strong> <div data-titledivname="z3110" data-textdivname="x3110" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D28.1">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Benign neoplasm of vagina</div><div class="img i3"><span class="searchKeywords">Benign (not <span class="highlight">cancer</span>) neoplasm of vagina</span></div></div><div id="z3110" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D28.1</span></div><div id="x3110" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Benign neoplasm of vagina</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/Z00-Z99/Z77-Z99/Z80-/Z80.43">ICD-10-CM Diagnosis Code <span class="identifier">Z80.43</span></a></strong> <div data-titledivname="z94186" data-textdivname="x94186" class="tip images-note"></div> <a class="convertSmall" href="/Convert/Z80.43">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Family history of malignant neoplasm of testis</div><div class="img i3"><span class="searchKeywords">Family history of <span class="highlight">cancer</span> of the testicle</span></div></div><div id="z94186" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">Z80.43</span></div><div id="x94186" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Family history of malignant neoplasm of testis</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> <span class="label codebadge label-info">POA Exempt</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/Z00-Z99/Z77-Z99/Z80-/Z80.51">ICD-10-CM Diagnosis Code <span class="identifier">Z80.51</span></a></strong> <div data-titledivname="z94189" data-textdivname="x94189" class="tip images-note"></div> <a class="convertSmall" href="/Convert/Z80.51">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Family history of malignant neoplasm of kidney</div><div class="img i3"><span class="searchKeywords">Family history of <span class="highlight">cancer</span> of the kidney</span></div></div><div id="z94189" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">Z80.51</span></div><div id="x94189" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Family history of malignant neoplasm of kidney</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> <span class="label codebadge label-info">POA Exempt</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right danger"></i> <a href="ICD10CM/Codes/C00-D49/C43-C44/C44-/C44.72">ICD-10-CM Diagnosis Code <span class="identifier">C44.72</span></a></strong> <div data-titledivname="z1721" data-textdivname="x1721" class="tip images-note"></div></div><div class="searchPadded"><div>Squamous cell carcinoma of skin of lower limb, including hip</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span>, skin of left leg; Primary skin <span class="highlight">cancer</span> of left lower limb</span></div></div><div id="z1721" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">C44.72</span></div><div id="x1721" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Squamous cell carcinoma of skin of lower limb, including hip</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-danger">Non-Billable/Non-Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/C00-D49/D00-D09/D07-/D07.0">ICD-10-CM Diagnosis Code <span class="identifier">D07.0</span></a></strong> <div data-titledivname="z2882" data-textdivname="x2882" class="tip images-note"></div> <a class="convertSmall" href="/Convert/D07.0">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Carcinoma in situ of endometrium</div><div class="img i3"><span class="searchKeywords"><span class="highlight">Cancer</span> in situ of uterus; <span class="highlight">Cancer</span> in situ, endometrium; Carcinoma in situ of uterus</span></div></div><div id="z2882" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">D07.0</span></div><div id="x2882" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Carcinoma in situ of endometrium</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/Z00-Z99/Z00-Z13/Z12-/Z12.5">ICD-10-CM Diagnosis Code <span class="identifier">Z12.5</span></a></strong> <div data-titledivname="z93259" data-textdivname="x93259" class="tip images-note"></div> <a class="convertSmall" href="/Convert/Z12.5">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Encounter for screening for malignant neoplasm of prostate</div><div class="img i3"><span class="searchKeywords">Screening exam for prostate <span class="highlight">cancer</span>; Screening examination for prostate <span class="highlight">cancer</span> done</span></div></div><div id="z93259" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">Z12.5</span></div><div id="x93259" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Encounter for screening for malignant neoplasm of prostate</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> <span class="label codebadge label-warning">Male Dx</span> <span class="label codebadge label-info">POA Exempt</span> </ul></div></div>
+        </div>
+        <div class="searchLine">
+<div><strong><i class="glyphicon glyphicon-triangle-right success"></i> <a href="ICD10CM/Codes/Z00-Z99/Z00-Z13/Z12-/Z12.6">ICD-10-CM Diagnosis Code <span class="identifier">Z12.6</span></a></strong> <div data-titledivname="z93260" data-textdivname="x93260" class="tip images-note"></div> <a class="convertSmall" href="/Convert/Z12.6">[convert to ICD-9-CM]</a></div><div class="searchPadded"><div>Encounter for screening for malignant neoplasm of bladder</div><div class="img i3"><span class="searchKeywords">Screening for <span class="highlight">cancer</span> of urinary bladder done; Screening for urinary bladder <span class="highlight">cancer</span></span></div></div><div id="z93260" class="z32">ICD-10-CM Diagnosis Code <span class="identifier">Z12.6</span></div><div id="x93260" class="z32"><div class="inPopover"><H2 class="codeDescriptionPopover">Encounter for screening for malignant neoplasm of bladder</H2><ul id="badgeList"><span class="label codebadge label-default">2016</span> <span class="label codebadge label-default">2017</span> <span class="label codebadge label-default">2018</span> <span class="label codebadge label-default">2019</span> <span class="label codebadge label-default">2020</span> <span class="label codebadge label-success">Billable/Specific Code</span> <span class="label codebadge label-info">POA Exempt</span> </ul></div></div>
+        </div>
+        <ul class="pagination">
+
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="/search?s=Cancer&page=2">2</a></li>
+                        <li><a href="/search?s=Cancer&page=3">3</a></li>
+                        <li><a href="/search?s=Cancer&page=4">4</a></li>
+                        <li><a href="/search?s=Cancer&page=5">5</a></li>
+                        <li><a href="/search?s=Cancer&page=6">6</a></li>
+                        <li><a href="/search?s=Cancer&page=7">7</a></li>
+                        <li><a href="/search?s=Cancer&page=8">8</a></li>
+                        <li><a href="/search?s=Cancer&page=9">9</a></li>
+                        <li><a href="/search?s=Cancer&page=10">10</a></li>
+                        <li><a href="/search?s=Cancer&page=11">11</a></li>
+                        <li><a href="/search?s=Cancer&page=12">12</a></li>
+                        <li><a href="/search?s=Cancer&page=13">13</a></li>
+                        <li><a href="/search?s=Cancer&page=14">14</a></li>
+                        <li><a href="/search?s=Cancer&page=15">15</a></li>
+                        <li><a href="/search?s=Cancer&page=16">16</a></li>
+                        <li><a href="/search?s=Cancer&page=17">17</a></li>
+                        <li><a href="/search?s=Cancer&page=18">18</a></li>
+                        <li><a href="/search?s=Cancer&page=19">19</a></li>
+                        <li><a href="/search?s=Cancer&page=20">20</a></li>
+
+        </ul>
+
+                </div>
+           </div>
+           <div class="col-sm-4">
+               <div class="proper-ad-right">
+                   <div class="proper-ad-unit"> <div id="proper-ad-icd10data_side_1"> <script> propertag.cmd.push(function() { proper_display('icd10data_side_1'); }); </script> </div> </div>
+               </div>
+           </div>
+       </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>
+                        <a href="/AdvertiseWithUs">Advertise with Us</a>  |  <a href="/LicenseICD10Data">License ICD10 Data</a>
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="text-right">
+                        Copyright &copy; 2018  |  ICD10data.com
+                    </p>
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+        </div>
+    </div>
+  
+
+    <script src="/b/s?v=rO2kvaqFX-G9C_aX2ZQuwsPsMU7sToEuiI6kDqdZ1b81"></script>
+
+    
+    <script src="https://static.aapc.com/aapc/js/hellobar-on-off.js" defer async></script>
+    <script src="https://static.aapc.com/aapc/js/hellobar-icd10datacom.js" defer async></script>
+
+</body>
+</html>
