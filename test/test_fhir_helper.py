@@ -7,8 +7,9 @@ Created on Nov 18, 2019
 import os
 from shutil import copyfile
 from unittest import mock
-import fhir_helper
 from test.mocks import url_mocks
+
+import fhir_helper
 
 def test_ingest_output_data():
     """
