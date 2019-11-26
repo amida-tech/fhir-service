@@ -385,7 +385,7 @@ def handle_cli(cli_args):
 # argparse parser
 parser = argparse.ArgumentParser()
 parser.add_argument('cfile', help='The location of a configuration file')
-parser.add_argument('--test', default=False, help='Are we running the test mode')
+parser.add_argument('--test', default='False', help='Are we running the test mode')
 parser.set_defaults(func=handle_cli)
 
 if __name__ == '__main__':
