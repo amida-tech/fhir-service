@@ -18,5 +18,5 @@ STEMMER	Porter
 TOKENIZER	whitespace
 STOPWORD	aggressive
 
-BASE_ICD_URL	'https://www.icd10data.com/'
-BASE_MEDLINEPLUS_URL	'https://medlineplus.gov/'
+BASE_ICD_URL	https://www.icd10data.com/
+BASE_MEDLINEPLUS_URL	https://medlineplus.gov/
