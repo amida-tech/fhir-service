@@ -8,6 +8,7 @@ import argparse
 import json
 from os import listdir
 from os.path import isfile, join
+import urllib
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
@@ -154,11 +155,11 @@ def lookup_medlineplus(base_url, user_query, html_lookups_file):
         soup = BeautifulSoup(myfile, 'html.parser')
         aliases = soup.findAll("span", {"class": "alsocalled"})
         if not aliases:
-            return
+            return alts
         alsocalled = aliases[0].text
         alsocalled = alsocalled[13:]
         alts.update([item.strip() for item in alsocalled.split(',')])
-        print("HTML found " + str(alts))
+        print("Medlineplus HTML found " + str(alts))
         with open(html_lookups_file, 'a', encoding='utf-8') as fs:
             for alt in alts:
                 fs.write(user_query + '\t'  + alt + '\n')
@@ -199,6 +200,7 @@ def lookup_icd10data(base_url, user_query, html_lookups_file):
                 for synonym in synonyms:
                     alts.add(synonym.text)
 
+        print("ICD10Data HTML found " + str(alts))
         with open(html_lookups_file, 'a', encoding='utf-8') as fs:
             for alt in alts:
                 fs.write(user_query + '\t'  + alt + '\n')
@@ -278,8 +280,6 @@ def main(config_dict):
         candidates = find_condition_information(
             more_candidates, config_dict['QUERY_METHOD'],
             config_dict['SIMILARITY_METRIC'], config_dict['STEMMER'], config_dict['TOKENIZER'])
-
-        print(candidates)
 
         # then we will mock the user selecting an item
         user_candidate = get_console_input(False)
@@ -385,7 +385,7 @@ def handle_cli(cli_args):
 # argparse parser
 parser = argparse.ArgumentParser()
 parser.add_argument('cfile', help='The location of a configuration file')
-parser.add_argument('--test', default=False, help='Are we running the test mode')
+parser.add_argument('--test', default='False', help='Are we running the test mode')
 parser.set_defaults(func=handle_cli)
 
 if __name__ == '__main__':

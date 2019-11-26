@@ -53,8 +53,6 @@ def find_tokenized_variety(output_token_dict, conditions, threshold, similarity_
                         total_dict[item] = similarity
                 else:
                     total_dict[item] = similarity
-                print(condition + ' -> ' + item)
-                print(similarity)
 
     sorted_by_similarity = sorted(total_dict.items(), key=operator.itemgetter(1), reverse=True)
     return sorted_by_similarity
