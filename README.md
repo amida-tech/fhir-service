@@ -5,12 +5,13 @@ Python service to return VASDR information for general (or official) medical con
 1. REST API - Run FHIR_Helper_Flask.py.  Use your favorite method (such as Postman) to make POST requests on the specified URL and POST.
     1. The endpoint "suggest".  A medical phrases is given and a list of candidates is returned with their similarity scores in descending order.  4 parameters may be supplied
         1. query (required) - The user query to lookup
-        2. limit (optional, defalut no limit) - Limit the number of candidates to be the top n
-        3. threshold (optional, default 0.0) - Only return candidates with a similarity score which exceeds threshold
-        4. similairty (optional, default 'harmonic') - The similarity metric to use.  The choices are 'harmonic', 'cosine', 'jaccard'.
-        5. stemmer (optional, default 'Porter') - The stemmer or lemmatizer to use.  The choices are 'Porter' and 'Snowball'.
-        6. tokenizer (optional, default 'whitespace') - The tokenizer to use.  The choices are 'whitespace' and 'nltk'.
-        7. stopword (optional, default 'aggressive') - The stopword list to use.  The choices are 'aggressive' and 'nltk'.    
+        2. query_method (optional, default 'tokenized') - The search method to use
+        3. limit (optional, default no limit) - Limit the number of candidates to be the top n
+        4. threshold (optional, default 0.0) - Only return candidates with a similarity score which exceeds threshold
+        5. similairty (optional, default 'harmonic') - The similarity metric to use.  The choices are 'harmonic', 'cosine', 'jaccard'.
+        6. stemmer (optional, default 'Porter') - The stemmer or lemmatizer to use.  The choices are 'Porter' and 'Snowball'.
+        7. tokenizer (optional, default 'whitespace') - The tokenizer to use.  The choices are 'whitespace' and 'nltk'.
+        8. stopword (optional, default 'aggressive') - The stopword list to use.  The choices are 'aggressive' and 'nltk'.
     2. The endpoint "fetch".  Given a candidate (as fetched from "suggest" or chosen from the output.tsv spreadsheet), find all the relevant information for that candidate.  1 parameter may be given
         1. candidate - The candidate to get the full information from
 		

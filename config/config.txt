@@ -11,6 +11,10 @@ FHIR_DATA_DIR	data/fhir_stu3
 TEXT_LIST_FILE	output/text_list.tsv
 HTML_LOOKUP_FILE	data/medfind.txt
 
+SVM_MODEL	model/svm.p
+SVM_TFIDF_MODEL	model/svm_tfidf_vectorizer.p
+SVM_UNIQUES	model/svm_uniques.p
+
 SIMILARITY_METRIC	cosine
 QUERY_METHOD	tokenized
 STEMMER	Porter
